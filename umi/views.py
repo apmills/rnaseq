@@ -12,3 +12,15 @@ class TestView(generic.base.TemplateView):
 
 class UmiRandomView(generic.base.TemplateView):
     template_name = 'umi/umiRandom.html'
+
+class AmpBiasView(generic.base.TemplateView):
+    template_name = 'umi/ampBias.html'
+
+class GeneBiasView(generic.base.TemplateView):
+    template_name = 'umi/geneBias.html'
+
+class MammalDataView(generic.base.TemplateView):
+    template_name = 'umi/mammalData.html'
+
+class AboutView(generic.base.TemplateView):
+    template_name = 'umi/about.html'

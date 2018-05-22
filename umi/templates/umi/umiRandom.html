@@ -20,19 +20,103 @@
 <br>
 
 <div class='w3-container'>
-<button onclick="accord('Freqs')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Distribution of UMI frequencies</button>
-<div id="Freqs" class="w3-hide w3-container w3-animate-bottom">
-    <canvas id="freqChart"></canvas>
-    <p>Wowee</p>
+  <button onclick="accord('Freqs')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Distribution of UMI frequencies</button>
+  <div id="Freqs" class="w3-hide w3-container w3-animate-bottom">
+      <canvas id="freqChart"></canvas>
+      <p>Text</p>
 
+  </div>
+
+  <button onclick="accord('Top1000')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Composition of the 1000 most common UMIs</button>
+  <div id="Top1000" class="w3-hide w3-container w3-animate-bottom">
+    <br>
+    <h5>Title of the Table</h5>
+    <table class="w3-table w3-bordered">
+    <thead>
+    <tr class="w3-theme-l1 table-hover">
+      <th></th>
+      <th colspan="2" class='w3-center'>>=5 Bases Identical</th>
+      <th colspan="2" class='w3-center'>>=6 Bases Identical</th>
+      <th colspan="2" class='w3-center'>>=7 Bases Identical</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class='w3-theme-l1'>
+      <th>Repeated Base</th>
+      <th>No. UMIs</th>
+      <th>Percentage</th>
+      <th>No. UMIs</th>
+      <th>Percentage</th>
+      <th>No. UMIs</th>
+      <th>Percentage</th>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>204</td>
+      <td>22%</td>
+      <td>182</td>
+      <td>26%</td>
+      <td>25</td>
+      <td>26%</td>
+    </tr>
+    <tr class="w3-theme-l4">
+      <td>C</td>
+      <td>46</td>
+      <td>5%</td>
+      <td>36</td>
+      <td>5%</td>
+      <td>22</td>
+      <td>23%</td>
+    </tr>
+    <tr>
+      <td>G</td>
+      <td>466</td>
+      <td>49%</td>
+      <td>274</td>
+      <td>40%</td>
+      <td>25</td>
+      <td>26%</td>
+    </tr>
+    <tr class="w3-theme-l4">
+      <td>T</td>
+      <td>229</td>
+      <td>24%</td>
+      <td>197</td>
+      <td>29%</td>
+      <td>25</td>
+      <td>26%</td>
+    </tr>
+    <tr class="w3-theme-l1">
+      <td><b>Total</b></td>
+      <td><b>945</b></td>
+      <td><b>100%</b></td>
+      <td><b>689</b></td>
+      <td><b>100%</b></td>
+      <td><b>97</b></td>
+      <td><b>100%</b></td>
+    </tr>
+    </tbody>
+    </table>
+    <br>
+    <p>This is where you would talk about the very interesting data in that table</p>
+  </div>
 </div>
 
-<button onclick="accord('Top1000')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Composition of the 1000 most common UMIs</button>
-<div id="Top1000" class="w3-hide w3-container w3-animate-right">
-    <p>Wowee that's cool!</p>
+<br>
+
+<div class="w3-container">
+  <h5>Conclusion</h5>
+  <p>Well this leads us to believe they are not that random actually</p>
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
 </div>
 
+<div class="w3-row w3-container">
+    <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/"><i class='fa fa-arrow-left'></i> Previous<br>Return to Home</a>
+    <a class="w3-btn w3-theme w3-hover-theme w3-right" href="/umi/amp-bias">Next <i class='fa fa-arrow-right'></i><br>Amplification Bias?</a>
 </div>
+
+<br>
+<br>
 
 <script>
 function accord(id) {
@@ -55,12 +139,12 @@ var chart = new Chart(ctx, {
 
     // The data for our dataset
     data: {
-        labels: umis,
+        labels: umiRandom_1_umis,
         datasets: [{
             label: "Occurence",
             backgroundColor: 'rgb(99, 99, 255)',
             borderColor: 'rgb(99, 99, 255)',
-            data: counts,
+            data: umiRandom_1_counts,
         }],
 
     },
