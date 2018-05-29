@@ -17,6 +17,40 @@
   <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
 </div>
 
+<div class='w3-container'>
+  <button onclick="accord('test')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Top UMI Bar Charts</button>
+  <div id="test" class="w3-hide w3-container w3-animate-bottom">
+    <div class='w3-row'>
+      <div class='w3-half'>
+        <canvas id="geneChart1"></canvas>
+      </div>
+      <div class='w3-half'>
+        <canvas id="geneChart2"></canvas>
+      </div>
+    </div>
+    <div class='w3-row'>
+      <div class='w3-half'>
+        <canvas id="geneChart3"></canvas>
+      </div>
+      <div class='w3-half'>
+        <canvas id="geneChart4"></canvas>
+      </div>
+    </div>
+    <div class='w3-row'>
+      <div class='w3-half tallerchart'>
+        <canvas id="geneChart5" class='tallerchart'></canvas>
+      </div>
+      <div class='w3-half tallerchart'>
+        <canvas id="geneChart6" class='tallerchart'></canvas>
+      </div>
+    </div>
+    <p>Text</p>
+
+  </div>
+
+</div>
+
+<br>
 
 <div class="w3-row w3-container">
     <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/amp-bias"><i class='fa fa-arrow-left'></i> Previous<br>Amplification Bias?</a>
@@ -24,4 +58,274 @@
 </div>
 
 <br>
+
+<script>
+
+function accord(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace("w3-theme", "w3-theme-l2");
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace("w3-theme-l2", "w3-theme");
+    }
+}
+
+// Six Top 100 UMI bar charts for top six genes
+var ctx1 = document.getElementById('geneChart1').getContext('2d');
+
+var chart1 = new Chart(ctx1, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: geneBias_1_umis,
+        datasets: [{
+            label: "SPRRNA.49",
+            data: geneBias_1_SPRRNA49,
+            backgroundColor: 'rgb(43, 41, 154)',
+            borderColor: 'rgb(43, 41, 154)',
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Count',
+                },
+                ticks: {
+                  max: 80
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'UMI'
+                },
+                ticks: {
+                  display: false
+                }
+            }],
+        }
+    }
+});
+
+var ctx2 = document.getElementById('geneChart2').getContext('2d');
+
+var chart2 = new Chart(ctx2, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: geneBias_1_umis,
+        datasets: [{
+            label: "SPRRNA.47",
+            data: geneBias_1_SPRRNA47,
+            backgroundColor: 'rgb(47, 133, 145)',
+            borderColor: 'rgb(47, 133, 145)',
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Count'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'UMI'
+                },
+                ticks: {
+                  display: false
+                }
+            }]
+        }
+    }
+});
+
+var ctx3 = document.getElementById('geneChart3').getContext('2d');
+
+var chart3 = new Chart(ctx3, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: geneBias_1_umis,
+        datasets: [{
+            label: "SPRRNA.48",
+            data: geneBias_1_SPRRNA48,
+            backgroundColor: 'rgb(212, 219, 31)',
+            borderColor: 'rgb(212, 219, 31)',
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Count',
+                },
+                ticks: {
+                  max: 80
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'UMI'
+                },
+                ticks: {
+                  display: false
+                }
+            }],
+        }
+    }
+});
+
+var ctx4 = document.getElementById('geneChart4').getContext('2d');
+
+var chart4 = new Chart(ctx4, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: geneBias_1_umis,
+        datasets: [{
+            label: "SPAC26F1.06",
+            data: geneBias_1_SPAC26F106,
+            backgroundColor: 'rgb(150, 49, 154)',
+            borderColor: 'rgb(150, 49, 154)',
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Count'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'UMI'
+                },
+                ticks: {
+                  display: false
+                }
+            }]
+        }
+    }
+});
+
+var ctx5 = document.getElementById('geneChart5').getContext('2d');
+
+var chart5 = new Chart(ctx5, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: geneBias_1_umis,
+        datasets: [{
+            label: "SPBC1815.01",
+            data: geneBias_1_SPBC181501,
+            backgroundColor: 'rgb(221, 160, 31)',
+            borderColor: 'rgb(221, 160, 31)',
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Count',
+                },
+                ticks: {
+                  max: 80
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'UMI'
+                },
+                ticks: {
+                  fontSize: 10,
+                  maxRotation: 90,
+                  minRotation: 90
+                }
+            }],
+        }
+    }
+});
+
+var ctx6 = document.getElementById('geneChart6').getContext('2d');
+
+var chart6 = new Chart(ctx6, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: geneBias_1_umis,
+        datasets: [{
+            label: "SPBC26H8.01",
+            data: geneBias_1_SPBC26H801,
+            backgroundColor: 'rgb(11, 128, 37)',
+            borderColor: 'rgb(11, 128, 37)',
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Count'
+                },
+                ticks: {
+                  max: 80
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: false,
+                    labelString: 'UMI'
+                },
+                ticks: {
+                  fontSize: 10,
+                  maxRotation: 90,
+                  minRotation: 90
+                }
+            }]
+        },
+    }
+});
+
+</script>
 {% endblock %}

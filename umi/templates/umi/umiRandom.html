@@ -100,6 +100,11 @@
     <br>
     <p>This is where you would talk about the very interesting data in that table</p>
   </div>
+
+  <button onclick="accord('2exp')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Comparison of UMI counts across two experiments</button>
+  <div id="2exp" class="w3-hide w3-container w3-animate-bottom">
+      <canvas id="2expChart"></canvas>
+      <p>Text</p>
 </div>
 
 <br>
@@ -162,6 +167,53 @@ var chart = new Chart(ctx, {
                 scaleLabel: {
                     display: true,
                     labelString: 'UMI'
+                },
+                ticks: {
+                  fontSize: 12,
+                  maxRotation: 90,
+                  minRotation: 90
+                }
+            }]
+        }
+    }
+});
+
+
+var twoExpData = umiRandom_2_xcounts.map((x, i) => {
+  return {
+    x: x,
+    y: umiRandom_2_ycounts[i]
+  };
+});
+var ctx2 = document.getElementById('2expChart').getContext('2d');
+var chart2 = new Chart(ctx2, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        labels: umiRandom_1_umis,
+        datasets: [{
+            label: "Occurence",
+            data: twoExpData,
+            showLine: false
+        }],
+
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log UMI Count in Experiment 2'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log UMI Count in Experiment 1'
                 }
             }]
         }

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<title>Are UMIs Random?</title>
+<title>Is There an Amplification Bias?</title>
 <header class="w3-container w3-theme w3-padding" id="myHeader">
   <div class="w3-center">
   <h1 class="w3-xxxlarge w3-animate-bottom">Are all UMIs amplified at the same rate?</h1>
@@ -19,14 +19,24 @@
 <br>
 
 <div class='w3-container'>
-  <button onclick="accord('test')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Distribution of UMI frequencies</button>
-  <div id="test" class="w3-hide w3-container w3-animate-bottom">
-      <canvas id="testChart"></canvas>
+  <button onclick="accord('reads2exp')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Comparison of UMI reads across two experiments</button>
+  <div id="reads2exp" class="w3-hide w3-container w3-animate-bottom">
+    <canvas id="reads2expChart"></canvas>
+    <p>Text</p>
+  </div>
+  <button onclick="accord('readsVCounts')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Comparison of the number of times a UMI is sequenced and its frequency</button>
+  <div id="readsVCounts" class="w3-hide w3-container w3-animate-bottom">
+    <canvas id="readsVCountsChart"></canvas>
+    <p>Text</p>
+  </div>
+  <button onclick="accord('readsPerVCount')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Reads per UMI compared with UMI frequency</button>
+  <div id="readsPerVCount" class="w3-hide w3-container w3-animate-bottom">
+      <canvas id="readsPerVCountChart"></canvas>
       <p>Text</p>
-      <div class="slidecontainer">
+      <!-- <div class="slidecontainer">
         <input type="range" min="10" max="1000" value="500" class="slider" step="1" id="myRange">
       </div>
-      <div id='demo'></div>
+      <div id='demo'></div> -->
 
   </div>
 
@@ -53,13 +63,105 @@ function accord(id) {
         x.previousElementSibling.className.replace("w3-theme-l2", "w3-theme");
     }
 }
-var ctx = document.getElementById('testChart').getContext('2d');
-var smallx = ampBias_test_x.slice(0, 50)
-var smally = ampBias_test_y.slice(0, 50)
-var data = smallx.map((x, i) => {
+
+var ctx2 = document.getElementById('reads2expChart').getContext('2d');
+// var smallx = ampBias_test_x.slice(0, 500)
+// var smally = ampBias_test_y.slice(0, 500)
+var readsTwoExpData = ampBias_1_xcounts.map((x, i) => {
   return {
     x: x,
-    y: smally[i]
+    y: ampBias_1_ycounts[i]
+  };
+});
+
+var chart2 = new Chart(ctx2, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        labels: umiRandom_1_umis,
+        datasets: [{
+            label: "Stuff",
+            data: readsTwoExpData,
+            showLine: false
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log UMI Reads in Experiment 2'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log UMI Reads in Experiment 1'
+                }
+            }]
+        }
+    }
+});
+
+var ctx3 = document.getElementById('readsVCountsChart').getContext('2d');
+// var smallx = ampBias_test_x.slice(0, 500)
+// var smally = ampBias_test_y.slice(0, 500)
+var readsVCountsData = ampBias_2_counts.map((x, i) => {
+  return {
+    x: x,
+    y: ampBias_2_reads[i]
+  };
+});
+
+var chart3 = new Chart(ctx3, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        labels: umiRandom_1_umis,
+        datasets: [{
+            label: "Stuff",
+            data: readsVCountsData,
+            showLine: false
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log UMI Reads'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log UMI frequency (count)'
+                }
+            }]
+        }
+    }
+});
+var ctx = document.getElementById('readsPerVCountChart').getContext('2d');
+// var smallx = ampBias_test_x.slice(0, 500)
+// var smally = ampBias_test_y.slice(0, 500)
+var data = ampBias_3_readsPer.map((x, i) => {
+  return {
+    x: x,
+    y: ampBias_3_count[i]
   };
 });
 
@@ -86,38 +188,38 @@ var chart = new Chart(ctx, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Count'
+                    labelString: 'Reads per UMI (reads/count)'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'UMI'
+                    labelString: 'UMI frequency (count)'
                 }
             }]
         }
     }
 });
 
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value; // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-    output.innerHTML = this.value;
-    smallx = ampBias_test_x.slice(0, this.value)
-    smally = ampBias_test_y.slice(0, this.value)
-    data = smallx.map((x, i) => {
-      return {
-        x: x,
-        y: smally[i]
-      };
-    });
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data = data
-    });
-    chart.update();
-}
+// var slider = document.getElementById("myRange");
+// var output = document.getElementById("demo");
+// output.innerHTML = slider.value; // Display the default slider value
+//
+// // Update the current slider value (each time you drag the slider handle)
+// slider.oninput = function() {
+//     output.innerHTML = this.value;
+//     smallx = ampBias_test_x.slice(0, this.value)
+//     smally = ampBias_test_y.slice(0, this.value)
+//     data = smallx.map((x, i) => {
+//       return {
+//         x: x,
+//         y: smally[i]
+//       };
+//     });
+//     chart.data.datasets.forEach((dataset) => {
+//       dataset.data = data
+//     });
+//     chart.update();
+// }
 </script>
 {% endblock %}
