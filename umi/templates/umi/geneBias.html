@@ -45,7 +45,16 @@
       </div>
     </div>
     <p>Text</p>
-
+  </div>
+  <button onclick="accord('readsPerCount')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Total gene reads versus gene expression</button>
+  <div id="readsPerCount" class="w3-hide w3-container w3-animate-bottom">
+    <canvas id="readsPerCountChart"></canvas>
+    <p>Text</p>
+  </div>
+  <button onclick="accord('gini')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Gini Index and Chart</button>
+  <div id="gini" class="w3-hide w3-container w3-animate-bottom">
+    <canvas id="giniChart"></canvas>
+    <p>Text</p>
   </div>
 
 </div>
@@ -317,13 +326,108 @@ var chart6 = new Chart(ctx6, {
                     display: false,
                     labelString: 'UMI'
                 },
-                ticks: {
-                  fontSize: 10,
-                  maxRotation: 90,
-                  minRotation: 90
-                }
+
+
+
             }]
         },
+    }
+});
+
+var ctx7 = document.getElementById('readsPerCountChart').getContext('2d');
+var data7 = geneBias_2_count.map((x, i) => {
+  return {
+    x: x,
+    y: geneBias_2_reads[i]
+  };
+});
+
+var chart7 = new Chart(ctx7, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        labels: umiRandom_1_umis,
+        datasets: [{
+            label: "Stuff",
+            data: data7,
+            showLine: false
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log Reads per Gene'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log Gene Expression (molecule count)'
+                }
+            }]
+        }
+    }
+});
+
+var ctx8 = document.getElementById('giniChart').getContext('2d');
+var data81 = geneBias_3_bins.map((x, i) => {
+  return {
+    x: x,
+    y: geneBias_3_result[i]
+  };
+});
+var data82 = geneBias_3_bins.map((x, i) => {
+  return {
+    x: x,
+    y: geneBias_3_bins[i]
+  };
+});
+var chart8 = new Chart(ctx8, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        datasets: [{
+            label: "Observed",
+            data: data81,
+            fill: false,
+            borderColor: 'rgb(255, 116, 0)'
+          },
+          {
+            label: "Perfect Equality",
+            data: data82,
+            fill: false,
+            borderColor: 'rgb(28, 85, 255)'
+          },
+        ],
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Fraction of Sequencing "Wealth"'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Fraction of Gene Population'
+                }
+            }]
+        }
     }
 });
 

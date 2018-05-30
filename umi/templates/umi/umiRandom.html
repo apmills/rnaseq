@@ -105,6 +105,16 @@
   <div id="2exp" class="w3-hide w3-container w3-animate-bottom">
       <canvas id="2expChart"></canvas>
       <p>Text</p>
+  </div>
+  <button onclick="accord('histo')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Histogram</button>
+  <div id="histo" class="w3-hide w3-container w3-animate-bottom">
+      <canvas id="histoChart"></canvas>
+      <p>Text</p>
+      <div class="slidecontainer">
+        <input type="range" min="10" max="60000" value="130" class="slider" step="1" id="myRange">
+      </div>
+      <div id='demo'></div>
+  </div>
 </div>
 
 <br>
@@ -219,6 +229,89 @@ var chart2 = new Chart(ctx2, {
         }
     }
 });
+
+function histogram(data, size) {
+    var length = data.length;
+
+    var min = data[0];
+    var max = data[1];
+
+    for (var i = 0; i < length; i++) {
+        var item = data[i];
+        if (item < min) min = item;
+        else if (item > max) max = item;
+    }
+
+    var bins = Math.ceil((max - min + 1) / size);
+
+    var histogram = new Array(bins);
+
+    for (var i = 0; i < bins; i++) histogram[i] = 0;
+
+    for (var i = 0; i < length; i++)
+        histogram[Math.floor((data[i] - min) / size)]++;
+
+    return histogram;
+}
+
+var histo = histogram(umiRandom_3_counts, 25)
+var maximum = 8880
+var histoBins = []
+var i = 0
+while (i <= maximum) {
+  histoBins.push(i)
+  i = i + 25
+}
+
+var ctx3 = document.getElementById('histoChart').getContext('2d');
+var chart3 = new Chart(ctx3, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: histoBins,
+        datasets: [{
+            label: "Occurence",
+            data: histo,
+            backgroundColor: 'rgb(99, 99, 255)',
+            borderColor: 'rgb(99, 99, 255)',
+        }],
+
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Occurence'
+                },
+                ticks: {
+                  max: 130,
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'UMI Frequency (count)'
+                }
+            }]
+        }
+    }
+});
+
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    output.innerHTML = this.value;
+    chart3.options.scales.yAxes[0].ticks.max = parseInt(this.value);
+    chart3.update();
+}
 </script>
 
 <br>

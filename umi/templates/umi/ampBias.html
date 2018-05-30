@@ -39,7 +39,16 @@
       <div id='demo'></div> -->
 
   </div>
-
+  <button onclick="accord('readsPer2exp')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Reads per UMI across two experiments</button>
+  <div id="readsPer2exp" class="w3-hide w3-container w3-animate-bottom">
+    <canvas id="readsPer2expChart"></canvas>
+    <p>Text</p>
+  </div>
+  <button onclick="accord('gini')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Reads per UMI across two experiments</button>
+  <div id="gini" class="w3-hide w3-container w3-animate-bottom">
+    <canvas id="giniChart"></canvas>
+    <p>Text</p>
+  </div>
 </div>
 
 <br>
@@ -156,8 +165,6 @@ var chart3 = new Chart(ctx3, {
     }
 });
 var ctx = document.getElementById('readsPerVCountChart').getContext('2d');
-// var smallx = ampBias_test_x.slice(0, 500)
-// var smally = ampBias_test_y.slice(0, 500)
 var data = ampBias_3_readsPer.map((x, i) => {
   return {
     x: x,
@@ -201,6 +208,102 @@ var chart = new Chart(ctx, {
     }
 });
 
+var ctx4 = document.getElementById('readsPer2expChart').getContext('2d');
+var data4 = ampBias_4_readsPerx.map((x, i) => {
+  return {
+    x: x,
+    y: ampBias_4_readsPery[i]
+  };
+});
+
+var chart4 = new Chart(ctx4, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        labels: umiRandom_1_umis,
+        datasets: [{
+            label: "Stuff",
+            data: data4,
+            showLine: false
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Reads per UMI in Experiment 2'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Reads per UMI in Experiment 1'
+                }
+            }]
+        }
+    }
+});
+
+var ctx5 = document.getElementById('giniChart').getContext('2d');
+var data51 = ampBias_5_bins.map((x, i) => {
+  return {
+    x: x,
+    y: ampBias_5_result[i]
+  };
+});
+var data52 = ampBias_5_bins.map((x, i) => {
+  return {
+    x: x,
+    y: ampBias_5_bins[i]
+  };
+});
+var chart5 = new Chart(ctx5, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        datasets: [{
+            label: "Observed",
+            data: data51,
+            fill: false,
+            borderColor: 'rgb(255, 116, 0)'
+          },
+          {
+            label: "Perfect Equality",
+            data: data52,
+            fill: false,
+            borderColor: 'rgb(28, 85, 255)'
+          },
+        ],
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Fraction of Sequencing "Wealth"'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Fraction of UMI Population'
+                }
+            }]
+        }
+    }
+});
 // var slider = document.getElementById("myRange");
 // var output = document.getElementById("demo");
 // output.innerHTML = slider.value; // Display the default slider value
