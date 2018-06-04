@@ -56,6 +56,11 @@
     <canvas id="giniChart"></canvas>
     <p>Text</p>
   </div>
+  <button onclick="accord('readsPerVCount')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Reads per gene versus gene expression</button>
+  <div id="readsPerVCount" class="w3-hide w3-container w3-animate-bottom">
+    <canvas id="readsPerVCountChart"></canvas>
+    <p>Text</p>
+  </div>
 
 </div>
 
@@ -431,5 +436,48 @@ var chart8 = new Chart(ctx8, {
     }
 });
 
+var ctx9 = document.getElementById('readsPerVCountChart').getContext('2d');
+var data9 = geneBias_4_counts.map((x, i) => {
+  return {
+    x: x,
+    y: geneBias_3_readsPer[i]
+  };
+});
+
+var chart9 = new Chart(ctx9, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        labels: umiRandom_1_umis,
+        datasets: [{
+            label: "Stuff",
+            data: data9,
+            showLine: false
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Average Reads per Gene Molecule'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Log Gene Expression (molecule count)'
+                }
+            }]
+        }
+    }
+});
 </script>
 {% endblock %}
