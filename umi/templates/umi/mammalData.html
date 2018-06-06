@@ -17,10 +17,325 @@
   <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
 </div>
 
+<div class='w3-container'>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Histogram of UMI frequencies</button>
+  <div id="histo" class="w3-container panel">
+      <canvas id="histoChart"></canvas>
+      <div class="slidecontainer">
+        <input type="range" min="10" max="280000" value="130" class="slider" step="1" id="myRange">
+      </div>
+      <div id='demo'></div>
+      <p>Drag the slider to change the maximum value on the y axis. Note that the most frequent UMI (only visible at low y max values) is present 8,898 times. Dragging the slider all the way to the right reveals the magnitude of the inequality in UMI frequencies. Almost all UMIs present in this data appear between 1 and 25 times. The extremely long tail of this histogram is already a strong indication that UMIs are not as random as expected.</p>
+  </div>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Frequencies of the 50 most common UMIs</button>
+  <div id="Freqs" class="w3-container panel">
+      <canvas id="freqChart"></canvas>
+      <p>The UMIs shown here are the most frequent, so they are found in the long tail of the previous histogram. Looking at the sequences reveals that the most common UMIs have relatively low complexity. The sequence of the most common UMI is actually just eight guanosine residues and almost all of the top 50 contain 7 or more of the same nucleotide. This observation is investigated further in the next tab.</p>
+  </div>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Composition of the 1,000 most common UMIs</button>
+  <div id="Top1000" class="w3-container panel">
+    <br>
+    <table class="w3-table w3-bordered">
+    <thead>
+    <tr class="w3-theme-l1 table-hover">
+      <th></th>
+      <th colspan="2" class='w3-center'>>=6 Bases Identical</th>
+      <th colspan="2" class='w3-center'>>=7 Bases Identical</th>
+      <th colspan="2" class='w3-center'>>=8 Bases Identical</th>
+      <th colspan="2" class='w3-center'>>=9 Bases Identical</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class='w3-theme-l1'>
+      <th>Repeated Base</th>
+      <th>No. UMIs</th>
+      <th>Percentage</th>
+      <th>No. UMIs</th>
+      <th>Percentage</th>
+      <th>No. UMIs</th>
+      <th>Percentage</th>
+      <th>No. UMIs</th>
+      <th>Percentage</th>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>52</td>
+      <td>35%</td>
+      <td>9</td>
+      <td>19%</td>
+      <td>0</td>
+      <td>0%</td>
+      <td>0</td>
+      <td>0%</td>
+    </tr>
+    <tr class="w3-theme-l4">
+      <td>C</td>
+      <td>12</td>
+      <td>8%</td>
+      <td>2</td>
+      <td>4%</td>
+      <td>0</td>
+      <td>0%</td>
+      <td>0</td>
+      <td>0%</td>
+    </tr>
+    <tr>
+      <td>G</td>
+      <td>41</td>
+      <td>28%</td>
+      <td>9</td>
+      <td>19%</td>
+      <td>2</td>
+      <td>11%</td>
+      <td>0</td>
+      <td>0%</td>
+    </tr>
+    <tr class="w3-theme-l4">
+      <td>T</td>
+      <td>43</td>
+      <td>29%</td>
+      <td>28</td>
+      <td>58%</td>
+      <td>16</td>
+      <td>89%</td>
+      <td>7</td>
+      <td>100%</td>
+    </tr>
+    <tr class="w3-theme-l1">
+      <td><b>Total</b></td>
+      <td><b>148</b></td>
+      <td><b>100%</b></td>
+      <td><b>48</b></td>
+      <td><b>100%</b></td>
+      <td><b>18</b></td>
+      <td><b>100%</b></td>
+      <td><b>7</b></td>
+      <td><b>100%</b></td>
+    </tr>
+    </tbody>
+    </table>
+    <br>
+    <p>Expanding the focus to the top 1,000 most common UMIs, it is clear that low complexity is related in some way to frequency. The same nucleotide makes up more than half of the sequence for almost 70% of these UMIs. By far the most common nucleotide in the top 1,000 is guanosine while curiously, cytosine is highly underrepresented. </p>
+  </div>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Gini Index and Chart</button>
+  <div id="gini" class="w3-container panel">
+    <canvas id="giniChart"></canvas>
+    <p>Text</p>
+  </div>
+</div>
+
+<br>
+<div class="w3-container">
+  <h5>Conclusion</h5>
+  <p>Well this leads us to believe they are not that random actually</p>
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+</div>
 <div class="w3-row w3-container">
     <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/gene-bias"><i class='fa fa-arrow-left'></i> Previous<br>Is There a Gene Bias?</a>
     <a class="w3-btn w3-theme w3-hover-theme w3-right" href="/umi/mammal-data">Next <i class='fa fa-arrow-right'></i><br>Conclusion</a>
 </div>
 
 <br>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var w;
+
+for (w = 0; w < acc.length; w++) {
+  acc[w].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+      panel.style.border = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      panel.style.border = 1 + "px solid #b7d9fc";
+    }
+  });
+}
+
+function histogram(data, size) {
+    var length = data.length;
+
+    var min = data[0];
+    var max = data[1];
+
+    for (var i = 0; i < length; i++) {
+        var item = data[i];
+        if (item < min) min = item;
+        else if (item > max) max = item;
+    }
+
+    var bins = Math.ceil((max - min + 1) / size);
+
+    var histogram = new Array(bins);
+
+    for (var i = 0; i < bins; i++) histogram[i] = 0;
+
+    for (var i = 0; i < length; i++)
+        histogram[Math.floor((data[i] - min) / size)]++;
+
+    return histogram;
+}
+
+var histo = histogram(mamData_1_counts, 1)
+var maximum = 86
+var histoBins = []
+var i = 1
+while (i <= maximum) {
+  histoBins.push(i)
+  i = i + 1
+}
+
+var ctx1 = document.getElementById('histoChart').getContext('2d');
+var chart1 = new Chart(ctx1, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: histoBins,
+        datasets: [{
+            label: "Occurence",
+            data: histo,
+            backgroundColor: 'rgb(99, 99, 255)',
+            borderColor: 'rgb(99, 99, 255)',
+        }],
+
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Occurence'
+                },
+                ticks: {
+                  max: 130,
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'UMI Frequency (count)'
+                },
+                ticks: {
+                  fontSize: 12,
+                  maxRotation: 90,
+                  minRotation: 90,
+                  maxTicksLimit: 100,
+                }
+            }],
+
+        }
+    }
+});
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    output.innerHTML = this.value;
+    chart1.options.scales.yAxes[0].ticks.max = parseInt(this.value);
+    chart1.update();
+}
+
+var ctx2 = document.getElementById('freqChart').getContext('2d');
+var chart2 = new Chart(ctx2, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: mamData_2_umis,
+        datasets: [{
+            label: "Occurence",
+            backgroundColor: 'rgb(99, 99, 255)',
+            borderColor: 'rgb(99, 99, 255)',
+            data: mamData_2_counts,
+        }],
+
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Count'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'UMI Sequence'
+                },
+                ticks: {
+                  fontSize: 12,
+                  maxRotation: 90,
+                  minRotation: 90
+                }
+            }]
+        }
+    }
+});
+var ctx3 = document.getElementById('giniChart').getContext('2d');
+var data31 = mamData_3_bins.map((x, i) => {
+  return {
+    x: x,
+    y: mamData_3_result[i]
+  };
+});
+var data32 = mamData_3_bins.map((x, i) => {
+  return {
+    x: x,
+    y: mamData_3_bins[i]
+  };
+});
+var chart3 = new Chart(ctx3, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        datasets: [{
+            label: "Observed",
+            data: data31,
+            fill: false,
+            borderColor: 'rgb(255, 116, 0)'
+          },
+          {
+            label: "Perfect Equality",
+            data: data32,
+            fill: false,
+            borderColor: 'rgb(28, 85, 255)'
+          },
+        ],
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Fraction of Sequencing "Wealth"'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Fraction of Gene Population'
+                }
+            }]
+        }
+    }
+});
+</script>
+
 {% endblock %}

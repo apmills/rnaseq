@@ -31,8 +31,8 @@
   </div>
   <br>
   <div class='w3-container'>
-    <button onclick="accord('example')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Click me!</button>
-    <div id="example" class="w3-hide w3-container w3-animate-bottom">
+    <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Click me!</button>
+    <div id="example" class="w3-container panel">
         <canvas id="exampleChart"></canvas>
         <p>Below the chart, you will find a short description of the chart and a discussion of its implications.</p>
 
@@ -47,17 +47,21 @@
   <br>
 
 <script>
-function accord(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace("w3-theme", "w3-theme-l2");
+var acc = document.getElementsByClassName("accordion");
+var w;
+
+for (w = 0; w < acc.length; w++) {
+  acc[w].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+      panel.style.border = null;
     } else {
-        x.className = x.className.replace(" w3-show", "");
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace("w3-theme-l2", "w3-theme");
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      panel.style.border = 1 + "px solid #b7d9fc";
     }
+  });
 }
 var ctx = document.getElementById('exampleChart').getContext('2d');
 var chart = new Chart(ctx, {

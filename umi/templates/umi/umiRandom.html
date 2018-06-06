@@ -11,26 +11,31 @@
 <br>
 
 <div class="w3-container">
-  <h5>Introduction</h5>
-  <p>We expect UMIs to be this random because...</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-</div>
+  <p>As mentioned, the strength of UMIs comes from the fact that there are many more possible UMI sequences than transcript molecules for any one gene. For instance, in this dataset, there are no genes with above about 150 transcripts in a single cell. Combined with a UMI length of 8 (4<sup>8</sup> = 65,536 possible sequences), there is an acceptably low chance that the same UMI pattern will bind two of the same transcript.</p>
+  <p>However, this theory is based on the assumption that the 65 thousand UMIs are present in roughly equal amounts. If this assumption was found to be wrong, it could have serious implications for the reliability of UMI methods.</p>
+  </div>
 
 <br>
 
 <div class='w3-container'>
-  <button onclick="accord('Freqs')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Distribution of UMI frequencies</button>
-  <div id="Freqs" class="w3-hide w3-container w3-animate-bottom">
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Histogram of UMI frequencies</button>
+  <div id="histo" class="w3-container panel">
+      <canvas id="histoChart"></canvas>
+      <div class="slidecontainer">
+        <input type="range" min="10" max="60000" value="130" class="slider" step="1" id="myRange">
+      </div>
+      <div id='demo'></div>
+      <p>Drag the slider to change the maximum value on the y axis. Note that the most frequent UMI (only visible at low y max values) is present 8,898 times. Dragging the slider all the way to the right reveals the magnitude of the inequality in UMI frequencies. Almost all UMIs present in this data appear between 1 and 25 times. The extremely long tail of this histogram is already a strong indication that UMIs are not as random as expected.</p>
+  </div>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Frequencies of the 50 most common UMIs</button>
+  <div id="Freqs" class="w3-container panel">
       <canvas id="freqChart"></canvas>
-      <p>Text</p>
-
+      <p>The UMIs shown here are the most frequent, so they are found in the long tail of the previous histogram. Looking at the sequences reveals that the most common UMIs have relatively low complexity. The sequence of the most common UMI is actually just eight guanosine residues and almost all of the top 50 contain 7 or more of the same nucleotide. This observation is investigated further in the next tab.</p>
   </div>
 
-  <button onclick="accord('Top1000')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Composition of the 1000 most common UMIs</button>
-  <div id="Top1000" class="w3-hide w3-container w3-animate-bottom">
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Composition of the 1,000 most common UMIs</button>
+  <div id="Top1000" class="w3-container panel">
     <br>
-    <h5>Title of the Table</h5>
     <table class="w3-table w3-bordered">
     <thead>
     <tr class="w3-theme-l1 table-hover">
@@ -98,23 +103,15 @@
     </tbody>
     </table>
     <br>
-    <p>This is where you would talk about the very interesting data in that table</p>
+    <p>Expanding the focus to the top 1,000 most common UMIs, it is clear that low complexity is related in some way to frequency. The same nucleotide makes up more than half of the sequence for almost 70% of these UMIs. By far the most common nucleotide in the top 1,000 is guanosine while curiously, cytosine is highly underrepresented. </p>
   </div>
 
-  <button onclick="accord('2exp')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Comparison of UMI counts across two experiments</button>
-  <div id="2exp" class="w3-hide w3-container w3-animate-bottom">
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of UMI counts across two experiments</button>
+  <div id="2exp" class="w3-container panel">
       <canvas id="2expChart"></canvas>
-      <p>Text</p>
+      <p>Comparing these results with those of a similar <i>S. pombe</i> experiment suggests that UMI frequency is consistent across experiments. Here, the natural logarithm has been taken for both axes and a very strong correlation can easily be seen.</p>
   </div>
-  <button onclick="accord('histo')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Histogram</button>
-  <div id="histo" class="w3-hide w3-container w3-animate-bottom">
-      <canvas id="histoChart"></canvas>
-      <p>Text</p>
-      <div class="slidecontainer">
-        <input type="range" min="10" max="60000" value="130" class="slider" step="1" id="myRange">
-      </div>
-      <div id='demo'></div>
-  </div>
+
 </div>
 
 <br>
@@ -134,17 +131,21 @@
 <br>
 
 <script>
-function accord(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace("w3-theme", "w3-theme-l2");
+var acc = document.getElementsByClassName("accordion");
+var w;
+
+for (w = 0; w < acc.length; w++) {
+  acc[w].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+      panel.style.border = null;
     } else {
-        x.className = x.className.replace(" w3-show", "");
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace("w3-theme-l2", "w3-theme");
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      panel.style.border = 1 + "px solid #b7d9fc";
     }
+  });
 }
 
 var ctx = document.getElementById('freqChart').getContext('2d');
@@ -176,7 +177,7 @@ var chart = new Chart(ctx, {
             xAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'UMI'
+                    labelString: 'UMI Sequence'
                 },
                 ticks: {
                   fontSize: 12,
@@ -213,6 +214,9 @@ var chart2 = new Chart(ctx2, {
 
     // Configuration options go here
     options: {
+      tooltips: {
+        enabled: false
+      },
         scales: {
             yAxes: [{
                 scaleLabel: {
@@ -296,8 +300,15 @@ var chart3 = new Chart(ctx3, {
                 scaleLabel: {
                     display: true,
                     labelString: 'UMI Frequency (count)'
+                },
+                ticks: {
+                  fontSize: 12,
+                  maxRotation: 90,
+                  minRotation: 90,
+                  maxTicksLimit: 100,
                 }
-            }]
+            }],
+
         }
     }
 });

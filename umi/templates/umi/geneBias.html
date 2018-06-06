@@ -18,8 +18,8 @@
 </div>
 
 <div class='w3-container'>
-  <button onclick="accord('test')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Top UMI Bar Charts</button>
-  <div id="test" class="w3-hide w3-container w3-animate-bottom">
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Top UMI Bar Charts</button>
+  <div id="test" class="w3-container panel">
     <div class='w3-row'>
       <div class='w3-half'>
         <canvas id="geneChart1"></canvas>
@@ -46,18 +46,18 @@
     </div>
     <p>Text</p>
   </div>
-  <button onclick="accord('readsPerCount')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Total gene reads versus gene expression</button>
-  <div id="readsPerCount" class="w3-hide w3-container w3-animate-bottom">
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Total gene reads versus gene expression</button>
+  <div id="readsPerCount" class="w3-container panel">
     <canvas id="readsPerCountChart"></canvas>
     <p>Text</p>
   </div>
-  <button onclick="accord('gini')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Gini Index and Chart</button>
-  <div id="gini" class="w3-hide w3-container w3-animate-bottom">
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Gini Index and Chart</button>
+  <div id="gini" class="w3-container panel">
     <canvas id="giniChart"></canvas>
     <p>Text</p>
   </div>
-  <button onclick="accord('readsPerVCount')" class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align">Reads per gene versus gene expression</button>
-  <div id="readsPerVCount" class="w3-hide w3-container w3-animate-bottom">
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Reads per gene versus gene expression</button>
+  <div id="readsPerVCount" class="w3-container panel">
     <canvas id="readsPerVCountChart"></canvas>
     <p>Text</p>
   </div>
@@ -66,6 +66,11 @@
 
 <br>
 
+<div class="w3-container">
+  <h5>Conclusion</h5>
+  <p>Well this leads us to believe they are not that random actually</p>
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+</div>
 <div class="w3-row w3-container">
     <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/amp-bias"><i class='fa fa-arrow-left'></i> Previous<br>Amplification Bias?</a>
     <a class="w3-btn w3-theme w3-hover-theme w3-right" href="/umi/mammal-data">Next <i class='fa fa-arrow-right'></i><br>What About Mammal Data?</a>
@@ -74,18 +79,21 @@
 <br>
 
 <script>
+var acc = document.getElementsByClassName("accordion");
+var w;
 
-function accord(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace("w3-theme", "w3-theme-l2");
+for (w = 0; w < acc.length; w++) {
+  acc[w].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+      panel.style.border = null;
     } else {
-        x.className = x.className.replace(" w3-show", "");
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace("w3-theme-l2", "w3-theme");
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      panel.style.border = 1 + "px solid #b7d9fc";
     }
+  });
 }
 
 // Six Top 100 UMI bar charts for top six genes
