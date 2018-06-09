@@ -11,10 +11,8 @@
 <br>
 
 <div class="w3-container">
-  <h5>Introduction</h5>
-  <p>PCR amplification bias...</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  <p>Another aspect to UMIs that bears scrutiny is their relationship to amplification bias during PCR. Although the UMI tag is small compared to the rest of the transcript it is attached to, it still may somehow play a role in the amplification reaction. Finding that UMIs do exert some kind of amplification bias would result in mixed implications for the technique. Their purpose is to negate these biases through molecular counting, so notionally, introducing biases of their own is counterproductive but ultimately not significant. However, when combined with the previous evidence that UMIs are not as random—and thus not as effective at nullifying PCR biases—as previously thought, there is a potential for these effects to substantially impact the results.</p>
+  <p>This page introduces the concept of sequencing reads as another measurement of UMIs. Previously, UMI counts have been discussed. These counts, in theory, indicate the number of molecular instances of a UMI prior to any amplification. The number of reads of a UMI is the number of times it was sequenced and should be representative of the number of UMI instances after amplification. The more molecules, the more they will be sequenced (depending on the sequencing depth of the experiment). Reads can be thought of as a representative, but not exact, figure for a UMI’s count after amplification. Another new value, here called the PCR amplification factor (PAF), is the total number of reads of a UMI divided by its count. In essence, the PAF for a UMI is the extent to which it has been amplified. In other words, it is the mean number of reads across all instances of a UMI.</p>
 </div>
 <br>
 
@@ -22,41 +20,41 @@
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of UMI reads across two experiments</button>
   <div id="reads2exp" class="w3-container panel">
     <canvas id="reads2expChart"></canvas>
-    <p>Text</p>
+    <p>As a first step, UMI reads were compared across two experiments to see if they are consistent. It was already known that UMI counts correlate across these two experiments, so this result is largely as expected. The reason experiment 2 has higher reads in many instances is due to the fact that it has more reads overall than experiment 1.</p>
   </div>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of the number of times a UMI is sequenced and its frequency</button>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of a UMI's reads and its frequency</button>
   <div id="readsVCounts" class="w3-container panel">
     <canvas id="readsVCountsChart"></canvas>
-    <p>Text</p>
+    <p>This chart compares a UMI's reads with its count, which should be highly correlated. If all UMIs are amplified equally, then the UMI that appears most frequently before amplification (count) should also be most frequent after (reads). The result is that while these two values do correlate to some extent, there is still a fair amount of variation in the amplification that is not explained by a UMI's count. This is most evidently seen at the low end of the count scale where many UMIs have the same count value but a large variation in the number of reads. </p>
   </div>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Reads per UMI compared with UMI frequency</button>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">PAF compared with UMI frequency</button>
   <div id="readsPerVCount" class="w3-container panel">
-      <canvas id="readsPerVCountChart"></canvas>
-      <p>Text</p>
-      <!-- <div class="slidecontainer">
-        <input type="range" min="10" max="1000" value="500" class="slider" step="1" id="myRange">
-      </div>
-      <div id='demo'></div> -->
+    <canvas id="readsPerVCountChart"></canvas>
+    <p>Here, the PCR amplification factor for each UMI is compared with its count to see if UMIs of a certain frequency are being amplified more than others. The lack of a pattern suggests that this is not the case and that PAF varies across the spectrum of UMI frequency. Like the previous chart, there appears to be a large amount of variation in amplification. This in itself does not indicate any bias, as it could simply be the result of random effects during amplification.</p>
+    <!-- <div class="slidecontainer">
+      <input type="range" min="10" max="1000" value="500" class="slider" step="1" id="myRange">
+    </div>
+    <div id='demo'></div> -->
 
   </div>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Reads per UMI across two experiments</button>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">PAF across two experiments</button>
   <div id="readsPer2exp" class="w3-container panel">
     <canvas id="readsPer2expChart"></canvas>
-    <p>Text</p>
+    <p>This chart provides a very interesting and surprising insight. The same UMIs are being amplified more in both experiments with a strong correlation. This result suggests that something about these UMIs makes them consistently biased in favour of amplification.</p>
   </div>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Reads per UMI across two experiments</button>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Lorenz curve and amplification inequality</button>
   <div id="gini" class="w3-container panel">
     <canvas id="giniChart"></canvas>
-    <p>Text</p>
+    <p>The Lorenz curve is commonly used in economics as a representation of wealth or income inequality in a society. Here, it is being used to measure the inequality of amplification 'wealth' among the population of UMIs in the data set. The chart can be interpreted as follows: the bottom 80% of all UMIs have about 22% of the amplification 'wealth,' which is measured in PAF. In other words, after accounting for frequency, 78% of all reads are of a select 20% of UMIs. This inequality is reflected in the Gini coefficient, <b>SOMETHING</b>, which is worse than income inequality in South Africa, according to The World Factbook.</p>
   </div>
 </div>
 
 <br>
 
 <div class="w3-container">
-  <h5>Conclusion</h5>
-  <p>Well this leads us to believe they are not that random actually</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  <h5>Discussion</h5>
+  <p>The results of these analyses clearly show that there is some kind of amplification bias present in this data set. There is an unequal distribution of amplification across UMIs and certain UMIs are consistently amplified more in multiple experiments. The most puzzling finding is that there is no pattern among the sequences of these highly amplified UMIs, which precludes an easy explanation for their behaviour. However, perhaps it is logical that the sequence itself is not the cause given the small size of UMIs compared to the attached transcript. If there is a molecular basis for this amplification bias then it is reasonable that it would be found in the far larger and more influential sequence of the transcript. This topic is the subject of the next page.</p>
+  <p></p>
 </div>
 <div class="w3-row w3-container">
     <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/umi-random"><i class='fa fa-arrow-left'></i> Previous<br>Are UMIs Random?</a>
@@ -109,6 +107,7 @@ var chart2 = new Chart(ctx2, {
 
     // Configuration options go here
     options: {
+        animation: false,
         tooltips: {
           enabled: false
         },
@@ -155,6 +154,7 @@ var chart3 = new Chart(ctx3, {
 
     // Configuration options go here
     options: {
+        animation: false,
         tooltips: {
           enabled: false
         },
@@ -198,6 +198,7 @@ var chart = new Chart(ctx, {
 
     // Configuration options go here
     options: {
+        animation: false,
         tooltips: {
           enabled: false
         },
@@ -205,7 +206,7 @@ var chart = new Chart(ctx, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Reads per UMI (reads/count)'
+                    labelString: 'PCR Amplification Factor'
                 }
             }],
             xAxes: [{
@@ -242,6 +243,7 @@ var chart4 = new Chart(ctx4, {
 
     // Configuration options go here
     options: {
+        animation: false,
         tooltips: {
           enabled: false
         },
@@ -249,13 +251,13 @@ var chart4 = new Chart(ctx4, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Reads per UMI in Experiment 2'
+                    labelString: 'PAF in Experiment 2'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Reads per UMI in Experiment 1'
+                    labelString: 'PAF in Experiment 1'
                 }
             }]
         }
@@ -298,17 +300,18 @@ var chart5 = new Chart(ctx5, {
 
     // Configuration options go here
     options: {
+        animation: false,
         scales: {
             yAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Fraction of Sequencing "Wealth"'
+                    labelString: 'Percentage of Sequencing "Wealth"'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Fraction of UMI Population'
+                    labelString: 'Percentage of UMI Population'
                 }
             }]
         }

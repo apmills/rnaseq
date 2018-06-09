@@ -2,23 +2,21 @@
 
 {% block content %}
 
-<title>Are UMIs Random?</title>
+<title>Is There a Gene Bias?</title>
 <header class="w3-container w3-theme w3-padding" id="myHeader">
   <div class="w3-center">
-  <h1 class="w3-xxxlarge w3-animate-bottom">Do UMIs bind certain genes more frequently?</h1>
+  <h1 class="w3-xxxlarge w3-animate-bottom">Are certain genes bound or amplified more?</h1>
 </div>
 </header>
 <br>
 
 <div class="w3-container">
-  <h5>Introduction</h5>
-  <p>Some genes are more likely to...</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  <p>The amplification bias discovered on the previous page may be due to the gene sequence of the transcript rather than the UMI. A potential gene bias is two-fold: UMIs might preferentially bind certain genes and certain genes might themselves be amplified more often than others. The genes used in this part of the study are from a set of 1,011 genes that infrequently have zero expression in a cell. </p>
+  <p></p>
 </div>
 
 <div class='w3-container'>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Top UMI Bar Charts</button>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">UMI frequencies of the most common genes</button>
   <div id="test" class="w3-container panel">
     <div class='w3-row'>
       <div class='w3-half'>
@@ -339,9 +337,11 @@ var chart6 = new Chart(ctx6, {
                     display: false,
                     labelString: 'UMI'
                 },
-
-
-
+                ticks: {
+                  fontSize: 10,
+                  maxRotation: 90,
+                  minRotation: 90
+                }
             }]
         },
     }
