@@ -10,14 +10,14 @@
 </header>
 <br>
 
-<div class="w3-container">
-  <p>The amplification bias discovered on the previous page may be due to the gene sequence of the transcript rather than the UMI. A potential gene bias is two-fold: UMIs might preferentially bind certain genes and certain genes might themselves be amplified more often than others. The genes used in this part of the study are from a set of 1,011 genes that infrequently have zero expression in a cell. </p>
+<div class="w3-container w3-justify">
+  <p>The amplification bias discovered on the previous page may be due to the gene sequence of the transcript rather than the UMI. A potential gene bias is two-fold: UMIs might preferentially bind certain genes and certain genes might themselves be amplified more often than others. The genes used in this part of the study are from a set of 1,011 genes that infrequently have zero expression in a cell. In the case of genes, the expression in the cell is equivalent to the pre-amplification number of transcripts for that gene. It is analogous to the count of a UMI.</p>
   <p></p>
 </div>
 
 <div class='w3-container'>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">UMI frequencies of the most common genes</button>
-  <div id="test" class="w3-container panel">
+  <div id="test" class="w3-container panel w3-justify">
     <div class='w3-row'>
       <div class='w3-half'>
         <canvas id="geneChart1"></canvas>
@@ -42,38 +42,126 @@
         <canvas id="geneChart6" class='tallerchart'></canvas>
       </div>
     </div>
-    <p>Text</p>
+    <p>Several methods were attempted to calculate and display the propensity for UMIs to bind one gene over another. The difficulty lies in that the majority of UMIs bind only one or very few genes because they occur very infrequently. This means that there are many zeroes in the data, which rules out a simple approach such as a Chi-squared test. In the interest of time, the approach taken here is to compare the 50 most common UMIs with some of the most expressed genes so that both parties have a higher chance of interacting with each other. The results are shown in these 6 distributions. For the most part, the distributions look quite similar. Some UMIs such as TTTTTTTT stand out as varying more than others, but overall there is no clear case of a UMI preferentially binding one of these genes. Given more time, this would be an area worth exploring more rigorously.</p>
   </div>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Total gene reads versus gene expression</button>
-  <div id="readsPerCount" class="w3-container panel">
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of gene reads and gene expression</button>
+  <div id="readsPerCount" class="w3-container panel w3-justify">
     <canvas id="readsPerCountChart"></canvas>
-    <p>Text</p>
+    <p>Similar to the UMIs on the previous page, the reads for each gene tend to increase as the expression increases. Like the earlier case, there is still a fair amount of variation in read count for genes that are expressed at the same level. Again, there appears to be some possibly stochastic element that is affecting how gene are amplified.</p>
   </div>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Gini Index and Chart</button>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of PAF and gene expression</button>
+  <div id="readsPerVCount" class="w3-container panel w3-justify">
+    <canvas id="readsPerVCountChart"></canvas>
+    <p>Here the PAF of each gene is compared with its frequency. Most genes tend to have a PAF around 100, but there are several outliers above this mark and many more genes that have much lower PAF values. Like the previous chart, this indicates that some genes are being amplified more than others.</p>
+  </div>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">PAF across two experiments</button>
+  <div id="readsPer2Exp" class="w3-container panel w3-justify">
+    <canvas id="readsPer2ExpChart"></canvas>
+    <p>Genes continue to mirror the UMI results in this comparison of PAF values from two experiments. Once again, there is a striking correlation indicating that there is some consistency to which genes get amplified more. There is a denser concentration of data points around the 100 mark where some genes deviate from this correlation, but the majority of points lie almost directly on top of the y=x line.</p>
+  </div>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Features of the genes with the highest PAF values</button>
+  <div id="PAFcontent" class="w3-container panel w3-justify">
+    <br>
+    <table class="w3-table w3-bordered">
+    <thead>
+    <tr class="w3-theme-l1 table-hover">
+      <th class='w3-center'>Rank</th>
+      <th class='w3-center'>Gene ID</th>
+      <th class='w3-center'>PAF</th>
+      <th class='w3-center'>GC Content</th>
+      <th class='w3-center'>Length</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>1</td>
+      <td>SPCC794.04c</td>
+      <td>363.0</td>
+      <td>40.2%</td>
+      <td>1644</td>
+    </tr>
+    <tr class="w3-theme-l4">
+      <td>2</td>
+      <td>SPNCRNA.1324</td>
+      <td>296.7</td>
+      <td>36.6%</td>
+      <td>3627</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>SPBPB7E8.02</td>
+      <td>252.7</td>
+      <td>43.6%</td>
+      <td>2250</td>
+    </tr>
+    <tr class="w3-theme-l4">
+      <td>4</td>
+      <td>SPNCRNA.1116</td>
+      <td>239.0</td>
+      <td>37.0%</td>
+      <td>2697</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>SPAC3C7.05c</td>
+      <td>238.2</td>
+      <td>39.5%</td>
+      <td>1329</td>
+    </tr>
+    <tr class="w3-theme-l4">
+      <td>6</td>
+      <td>SPAC2E1P3.05c</td>
+      <td>229.7</td>
+      <td>43.1%</td>
+      <td>594</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>SPCC285.04</td>
+      <td>213.8</td>
+      <td>43.6%</td>
+      <td>2250</td>
+    </tr>
+    <tr class="w3-theme-l4">
+      <td>8</td>
+      <td>SPAC637.09</td>
+      <td>205.1</td>
+      <td>38.7%</td>
+      <td>375</td>
+    </tr>
+    <tr class="w3-theme-l3">
+      <td>971</td>
+      <td>SPAC4G9.04c</td>
+      <td>1.2</td>
+      <td>39.5%</td>
+      <td>1917</td>
+    </tr>
+    </tbody>
+    </table>
+    <br>
+    <p>This table contains the top 8 genes ranked by their PAF value as well as a representative from the low end of the spectrum. For each of these genes, the sequence was manually taken from PomBase<sup>[Citation Needed]</sup> and the GC content was calculated. The result is that both GC content and exonic length varies across these genes and neither can explain why they were amplified differently to others. This process could be made automatic and applied to all genes for a more complete overview, but that is beyond the scope of this project.</p>
+  </div>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Lorenz curve and amplification inequality among genes</button>
   <div id="gini" class="w3-container panel">
     <canvas id="giniChart"></canvas>
-    <p>Text</p>
-  </div>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Reads per gene versus gene expression</button>
-  <div id="readsPerVCount" class="w3-container panel">
-    <canvas id="readsPerVCountChart"></canvas>
-    <p>Text</p>
+    <p>A Lorenz curve and Gini coefficient was calculated based on the PAF values of genes as well. Interestingly, genes are much more equal in their share of amplfication 'wealth' with a Gini coefficient of 20.5 (slightly better than Finland - World Factbook). Despite all the similarites between the results on this page and those on the previous one, genes are much less unequal than UMIs. This is evidenced by the lower Gini coefficient and by how much closer the observed curve is to perfect equality.</p>
   </div>
 
 </div>
 
 <br>
 
-<div class="w3-container">
-  <h5>Conclusion</h5>
-  <p>Well this leads us to believe they are not that random actually</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+<div class="w3-container w3-justify">
+  <h5>Discussion</h5>
+  <p>Overall, genes seem to have many of the same strange amplification behaviours that UMIs do. Reads and gene expression do correlate quite well, but a lart part of the variation in reads is not explained by the number of gene transcripts. Like UMIs, the same genes are amplified more often in multiple experiments, which suggests the presence of some kind of persistent bias. However, this bias does not appear to be derived from the length or GC content of these transcripts.</p>
+  <p>The most interesting conclusion that can be drawn from these results is best shown by the Lorenz curve. On the previous page, it was speculated that the amplfication bias in UMIs could be due to the transcripts rather than the UMIs themselves. Yet the results shown here indicate that not only do UMIs bind transcripts in a mostly unbiased way, but the transcripts themselves are not nearly as biased as the UMIs. Even if there was a pattern of certain UMIs binding certain genes, the inequality of genes is too low to fully explain the amplification biases of UMIs.</p>
 </div>
 <div class="w3-row w3-container">
     <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/amp-bias"><i class='fa fa-arrow-left'></i> Previous<br>Amplification Bias?</a>
     <a class="w3-btn w3-theme w3-hover-theme w3-right" href="/umi/mammal-data">Next <i class='fa fa-arrow-right'></i><br>What About Mammal Data?</a>
 </div>
 
+<br>
 <br>
 
 <script>
@@ -105,8 +193,8 @@ var chart1 = new Chart(ctx1, {
     data: {
         labels: geneBias_1_umis,
         datasets: [{
-            label: "SPRRNA.49",
-            data: geneBias_1_SPRRNA49,
+            label: "SPAC26F1.06",
+            data: geneBias_1_SPAC26F106,
             backgroundColor: 'rgb(43, 41, 154)',
             borderColor: 'rgb(43, 41, 154)',
         }],
@@ -147,8 +235,8 @@ var chart2 = new Chart(ctx2, {
     data: {
         labels: geneBias_1_umis,
         datasets: [{
-            label: "SPRRNA.47",
-            data: geneBias_1_SPRRNA47,
+            label: "SPBC1815.01",
+            data: geneBias_1_SPBC181501,
             backgroundColor: 'rgb(47, 133, 145)',
             borderColor: 'rgb(47, 133, 145)',
         }],
@@ -161,6 +249,9 @@ var chart2 = new Chart(ctx2, {
                 scaleLabel: {
                     display: false,
                     labelString: 'Count'
+                },
+                ticks: {
+                  max: 80
                 }
             }],
             xAxes: [{
@@ -186,8 +277,8 @@ var chart3 = new Chart(ctx3, {
     data: {
         labels: geneBias_1_umis,
         datasets: [{
-            label: "SPRRNA.48",
-            data: geneBias_1_SPRRNA48,
+            label: "SPBC26H8.01",
+            data: geneBias_1_SPBC26H801,
             backgroundColor: 'rgb(212, 219, 31)',
             borderColor: 'rgb(212, 219, 31)',
         }],
@@ -228,8 +319,8 @@ var chart4 = new Chart(ctx4, {
     data: {
         labels: geneBias_1_umis,
         datasets: [{
-            label: "SPAC26F1.06",
-            data: geneBias_1_SPAC26F106,
+            label: "SPCC1223.02",
+            data: geneBias_1_SPCC122302,
             backgroundColor: 'rgb(150, 49, 154)',
             borderColor: 'rgb(150, 49, 154)',
         }],
@@ -242,6 +333,9 @@ var chart4 = new Chart(ctx4, {
                 scaleLabel: {
                     display: false,
                     labelString: 'Count'
+                },
+                ticks: {
+                  max: 80
                 }
             }],
             xAxes: [{
@@ -267,8 +361,8 @@ var chart5 = new Chart(ctx5, {
     data: {
         labels: geneBias_1_umis,
         datasets: [{
-            label: "SPBC1815.01",
-            data: geneBias_1_SPBC181501,
+            label: "SPBC19C2.07",
+            data: geneBias_1_SPBC19C207,
             backgroundColor: 'rgb(221, 160, 31)',
             borderColor: 'rgb(221, 160, 31)',
         }],
@@ -312,8 +406,8 @@ var chart6 = new Chart(ctx6, {
     data: {
         labels: geneBias_1_umis,
         datasets: [{
-            label: "SPBC26H8.01",
-            data: geneBias_1_SPBC26H801,
+            label: "SPAC6B12.15",
+            data: geneBias_1_SPAC6B1215,
             backgroundColor: 'rgb(11, 128, 37)',
             borderColor: 'rgb(11, 128, 37)',
         }],
@@ -431,13 +525,13 @@ var chart8 = new Chart(ctx8, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Fraction of Sequencing "Wealth"'
+                    labelString: 'Percentage of Sequencing "Wealth"'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Fraction of Gene Population'
+                    labelString: 'Percentage of Gene Population'
                 }
             }]
         }
@@ -482,6 +576,50 @@ var chart9 = new Chart(ctx9, {
                 scaleLabel: {
                     display: true,
                     labelString: 'Log Gene Expression (molecule count)'
+                }
+            }]
+        }
+    }
+});
+
+var ctx10 = document.getElementById('readsPer2ExpChart').getContext('2d');
+var data10 = geneBias_5_paf1.map((x, i) => {
+  return {
+    x: x,
+    y: geneBias_5_paf2[i]
+  };
+});
+
+var chart10 = new Chart(ctx10, {
+    // The type of chart we want to create
+    type: 'scatter',
+
+    // The data for our dataset
+    data: {
+        labels: umiRandom_1_umis,
+        datasets: [{
+            label: "Stuff",
+            data: data10,
+            showLine: false
+        }],
+    },
+
+    // Configuration options go here
+    options: {
+        tooltips: {
+          enabled: false
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'PAF in Experiment 2'
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'PAF in Experiment 1'
                 }
             }]
         }

@@ -7,6 +7,9 @@ from django.templatetags.static import static
 class HomeView(generic.base.TemplateView):
     template_name = 'umi/home.html'
 
+class IntroView(generic.base.TemplateView):
+    template_name = 'umi/intro.html'
+
 class TestView(generic.base.TemplateView):
     template_name = 'umi/test.html'
 
@@ -24,3 +27,9 @@ class MammalDataView(generic.base.TemplateView):
 
 class AboutView(generic.base.TemplateView):
     template_name = 'umi/about.html'
+
+class ConcView(generic.base.TemplateView):
+    template_name = 'umi/conclusion.html'
+
+class RefView(generic.base.TemplateView):
+    template_name = 'umi/references.html'

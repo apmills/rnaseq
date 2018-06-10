@@ -10,6 +10,9 @@ from . import views
 app_name = 'umi'
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
+    path('intro/', views.IntroView.as_view(), name='intro'),
+    path('conclusion/', views.ConcView.as_view(), name='conclusion'),
+    path('references/', views.RefView.as_view(), name='references'),
     path('about/', views.AboutView.as_view(), name='about'),
     path('test/', views.TestView.as_view(), name='test'),
     path('umi-random/', views.UmiRandomView.as_view(), name='umi-random'),

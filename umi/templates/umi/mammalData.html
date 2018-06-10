@@ -2,24 +2,23 @@
 
 {% block content %}
 
-<title>Are UMIs Random?</title>
+<title>Mammalian Data</title>
 <header class="w3-container w3-theme w3-padding" id="myHeader">
   <div class="w3-center">
-  <h1 class="w3-xxxlarge w3-animate-bottom">Mammalian Data</h1>
+  <h1 class="w3-xxxlarge w3-animate-bottom">How do UMIs behave in mammalian samples?</h1>
 </div>
 </header>
 <br>
 
-<div class="w3-container">
-  <h5>Introduction</h5>
-  <p>This is what we found in mammals...</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+<div class="w3-container w3-justify">
+  <p>The discoveries up to this point have all come from data originating in <i>S. pombe</i> cells. Many of the applications of scRNA-seq such as the study of early development and cellular disease states involve mouse or human cells. While the fundamental elements of the technique are the same, it is prudent to try to replicate the previous findings using data from mammalian cells for that reason. The data in this section comes from 100 human cells and is publicly available online. As always, there is a more detailed description of the data on the <a href='/umi/about'>About</a> page.</p>
+  <p>It is important to note that this data uses UMIs that are 10 bases long instead of 8 and that it originated from a different lab that may use different protocols. Due to the larger length of the sequence, the UMIs in this data set have many more (4<sup>10</sup> = 1,048,576) possible permutations and so the probability of two UMIs occuring with the same sequence is much lower. In addition, the sequencing depth of this experiment is lower, which results in a lower number of reads per cell and lower read counts overall across both UMIs and genes. Naturally, this is not ideal for comparison with the <i>S. pombe</i> data, but it was expedient.</p>
+  <p></p>
 </div>
 
 <div class='w3-container'>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Histogram of UMI frequencies</button>
-  <div id="histo" class="w3-container panel">
+  <div id="histo" class="w3-container panel w3-justify">
       <canvas id="histoChart"></canvas>
       <div class="slidecontainer">
         <input type="range" min="10" max="280000" value="130" class="slider" step="1" id="myRange">
@@ -28,12 +27,12 @@
       <p>Drag the slider to change the maximum value on the y axis. Note that the most frequent UMI (only visible at low y max values) is present 8,898 times. Dragging the slider all the way to the right reveals the magnitude of the inequality in UMI frequencies. Almost all UMIs present in this data appear between 1 and 25 times. The extremely long tail of this histogram is already a strong indication that UMIs are not as random as expected.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Frequencies of the 50 most common UMIs</button>
-  <div id="Freqs" class="w3-container panel">
+  <div id="Freqs" class="w3-container panel w3-justify">
       <canvas id="freqChart"></canvas>
       <p>The UMIs shown here are the most frequent, so they are found in the long tail of the previous histogram. Looking at the sequences reveals that the most common UMIs have relatively low complexity. The sequence of the most common UMI is actually just eight guanosine residues and almost all of the top 50 contain 7 or more of the same nucleotide. This observation is investigated further in the next tab.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Composition of the 1,000 most common UMIs</button>
-  <div id="Top1000" class="w3-container panel">
+  <div id="Top1000" class="w3-container panel w3-justify">
     <br>
     <table class="w3-table w3-bordered">
     <thead>
@@ -118,14 +117,14 @@
     <p>Expanding the focus to the top 1,000 most common UMIs, it is clear that low complexity is related in some way to frequency. The same nucleotide makes up more than half of the sequence for almost 70% of these UMIs. By far the most common nucleotide in the top 1,000 is guanosine while curiously, cytosine is highly underrepresented. </p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Gini Index and Chart</button>
-  <div id="gini" class="w3-container panel">
+  <div id="gini" class="w3-container panel w3-justify">
     <canvas id="giniChart"></canvas>
     <p>Text</p>
   </div>
 </div>
 
 <br>
-<div class="w3-container">
+<div class="w3-container w3-justify">
   <h5>Conclusion</h5>
   <p>Well this leads us to believe they are not that random actually</p>
   <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>

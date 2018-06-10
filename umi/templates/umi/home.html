@@ -1,113 +1,65 @@
-{% extends 'umi/base.html' %}
-{% load staticfiles%}
-{% block content %}
-<title>UMIs in scRNA-Seq Data</title>
+<!DOCTYPE html>
+<html>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analysis of PCR Bias in Single Cell RNA-Seq Data</title>
+{% load static %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'umi/style.css' %}" />
+<link rel="shortcut icon" href="{%  static 'umi/images/favicon.ico' %}">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="{% static "umi/js/data.js" %}"></script>
+
+<div class="w3-bar w3-theme-d2">
+  <a href="/umi/" class="w3-bar-item w3-button w3-hover-bar-theme w3-padding-16">Home</a>
+  <a href="/umi/intro" class="w3-bar-item w3-button w3-hover-bar-theme w3-padding-16">Introduction</a>
+  <a href="/umi/about/" class="w3-bar-item w3-button w3-hover-bar-theme w3-padding-16">About</a>
+  <div class="w3-dropdown-hover">
+    <button class="w3-button w3-hover-bar-theme w3-padding-16">
+      All Research Questions <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block">
+      <a href="/umi/umi-random/" class="w3-bar-item w3-button w3-hover-bar-theme">Are UMIs truly random?</a>
+      <a href="/umi/amp-bias/" class="w3-bar-item w3-button w3-hover-bar-theme">Is there an amplification bias?</a>
+      <a href="/umi/gene-bias/" class="w3-bar-item w3-button w3-hover-bar-theme">Is there a bias toward certain genes?</a>
+      <a href="/umi/mammal-data/" class="w3-bar-item w3-button w3-hover-bar-theme">Are these trends present in mammalian data?</a>
+    </div>
+  </div>
+  <a href="/umi/conclusion/" class="w3-bar-item w3-button w3-hover-bar-theme w3-padding-16">Conclusion</a>
+</div>
+
+<body>
+
   <header class="w3-container w3-theme w3-padding" id="myHeader">
-    <div class="w3-center">
-    <h4>Are they good? How good are they? Let's find out!</h4>
-    <h1 class="w3-xxxlarge w3-animate-bottom">UMIs in scRNA-Seq Data</h1>
+    <div class="w3-center w3-middle">
+    <h1 class="w3-xxxlarge w3-animate-bottom">Analysis of PCR Bias in Single Cell RNA-Seq Data</h1>
   </div>
   </header>
-  <br>
-  <div>
-  <a class="w3-btn w3-xlarge w3-theme-d1 w3-hover-theme" href="/umi/test">More fancy stuff</a>
-  </div>
+
   <br>
 
-  <div>
-    <div class="w3-container">
-      <h5>Introduction</h5>
-      <p>Single-cell RNA sequencing (scRNA-seq) is an important tool in bioinformatics and has been applied in studies ranging from tumours to early embryonic development. Rather than the standard, relative measures of expression such as reads per kilobase million (RPKM), molecular counting through the use of unique molecular identifiers (UMIs) has recently gained traction in the field. UMIs provide an absolute scale of measurement that can be intuitively compared across experiments as well as the means to capture more elusive transcripts that previously escaped detection. Because all current scRNA-seq methods involve amplification, the ability of UMIs to neutralise biases introduced by PCR is vital<sup>1,2</sup>.</p>
-      <img src="{%  static 'umi/images/UMIweb.png' %}" style="width:100%" alt="UMI Diagram">
-      <p>UMIs are 5- to 10-base-long sequences that are appended to mRNA transcripts that have been extracted from a cell. Although short, they can achieve a high level of variability because at each position, one of four nucleotide residues can exist. The figure above shows a simplified example of a UMI scRNA-seq procedure. In <b>a</b>, transcripts of three genes (indicated by the colours) are extracted from an orange cell. Black UMIs are appended to these transcripts in <b>b</b>, with the variable UMI sequences indicated by different shapes. The transcripts are amplified to approximately the same degree in <b>c</b>. Finally, in <b>d</b> the result is sequenced and analysed computationally. By counting unique combinations of gene and UMI, it is possible to derive the exact number of transcripts of each gene that was present in the cell<sup>1</sup>.</p>
-      <p>The utility of UMIs depends on their randomness and variability, as this is what prevents situations where two of the same UMI bind transcripts of the same gene<sup>1</sup>. In that scenario, one of the transcripts would effectively be lost because it would appear to have come from amplification and not the cell itself. Alarmingly, observations from a recent experiment with <i>Schizosaccharomyces pombe</i> (fission yeast) cells seem to indicate that UMIs are not as random as previously assumed. This report was designed to investigate the behaviour of UMIs in this data set as well as the role of amplification bias and whether certain genes were bound preferentially. Information about data sources and experimental details can be found on the <a href='about/'>About</a> page.</p>
-
-      <!-- <canvas id="myChart"></canvas> -->
-    </div>
-    <div class="w3-container">
-      <h5>Navigating This Site</h5>
-      <p>This website is divided into pages centered around different aspects of the study. Click the <b>Start</b> button below to advance to the next page. Charts and other supporting data are hidden in tabs like the one below to avoid an overload of information. Simply click on the tab to make its contents appear or disappear.</p>
-    </div>
+  <div class='w3-container w3-theme-l1 marge w3-justify'>
+    <h2>Abstract</h2>
+    <p>Text</p>
   </div>
-  <br>
-  <div class='w3-container'>
-    <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Click me!</button>
-    <div id="example" class="w3-container panel">
-        <canvas id="exampleChart"></canvas>
-        <p>Below, you will find a short description of the chart and a brief discussion of its implications.</p>
 
-    </div>
-  </div>
   <br>
-  <div class="w3-container">
-    <a class="w3-btn w3-theme w3-hover-theme w3-right" href="/umi/umi-random">Start <i class='fa fa-arrow-right'></i><br> Are UMIs Random?</a>
+
+  <div class='w3-container w3-theme-l1 marge w3-justify'>
+    <h2>Lay Summary</h2>
+    <p>With the proliferation of next-gen sequencing technologies, many new techniques appeared to take advantage of the fast and cheap sequencing. One such technique, RNA-Seq, involves the extraction and sequencing of RNA from a culture of cells with the goal of identifying which genes are being expressed and to what extent. Single cell RNA-Seq is a more advanced form of this practice, which allows researchers to analyse the RNA contents of a single cell instead of a homogenised mix of cells as before. This precision bring many advantages such as the ability to investigate differing expression patterns in a developing embryo with very few cells. However, because a single cell has a very small amount of RNA in it, the extracted material has to be amplified through the polymerase chain reaction (PCR). This amplification has the effect of intensifying existing variation in the sample and sometimes introducing biases of its own. Several methods exist to combat these ill effects of amplification, one of which is the use of unique molecular identifiers (UMIs).</p>
+    <p>UMIs are short sequences of DNA that are appended to the RNA molecules before they are amplified, essentially giving researchers a window into the cellular environment before any biases are introduced. Theoretically, UMIs can do this because their sequences are random and they themselves do not have any effect on amplification. In reality, these assumptions were found to be wrong based on the analyses of fission yeast data in this report. The sequences of UMIs were  </p>
   </div>
 
   <br>
   <br>
+  <br>
 
-<script>
-var acc = document.getElementsByClassName("accordion");
-var w;
+  <div class='w3-container w3-display-container'>
+    <a class="w3-btn w3-theme-l2 w3-hover-theme w3-display-middle w3-large" href="/umi/intro">Continue to<br>Introduction</a>
+  </div>
 
-for (w = 0; w < acc.length; w++) {
-  acc[w].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-      panel.style.border = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-      panel.style.border = 1 + "px solid #b7d9fc";
-    }
-  });
-}
-var ctx = document.getElementById('exampleChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ['','','','','','','','','','','','','','','',''],
-        datasets: [{
-            label: "Bioinformatics Knowledge",
-            borderColor: 'rgb(255, 116, 0)',
-            fill: false,
-            data: [20, 25, 30, 35, 40, 45, 50, 55, 60, 63, 65, 67, 69, 70, 71, 72],
-        },
-        {
-            label: "Web Development Knowledge",
-            borderColor: 'rgb(28, 85, 255)',
-            fill: false,
-            data: [0, 0, 0, 0, 0, 0, 0, 5, 20, 40, 60, 80, 95, 100, 100, 100],
-        }],
-
-    },
-
-    // Configuration options go here
-    options: {
-        scales: {
-            yAxes: [{
-                scaleLabel: {
-                    display: false,
-                    labelString: 'Count'
-                }
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: false,
-                    labelString: 'UMI'
-                },
-                ticks: {
-                  fontSize: 12,
-                  maxRotation: 90,
-                  minRotation: 90
-                }
-            }]
-        }
-    }
-});
-</script>
-{% endblock %}
+</body>

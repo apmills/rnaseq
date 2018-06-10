@@ -10,7 +10,7 @@
 </header>
 <br>
 
-<div class="w3-container">
+<div class="w3-container w3-justify">
   <p>As mentioned, the strength of UMIs comes from the fact that there are many more possible UMI sequences than transcript molecules for any one gene. For instance, in this dataset, there are no genes with above about 150 transcripts in a single cell. Combined with a UMI length of 8 (4<sup>8</sup> = 65,536 possible sequences), there is an acceptably low chance that the same UMI pattern will bind two of the same transcript.</p>
   <p>However, this theory is based on the assumption that the 65 thousand UMIs are present in roughly equal amounts. If this assumption was found to be wrong, it could have serious implications for the reliability of UMI methods.</p>
   </div>
@@ -19,7 +19,7 @@
 
 <div class='w3-container'>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Histogram of UMI frequencies</button>
-  <div id="histo" class="w3-container panel">
+  <div id="histo" class="w3-container panel w3-justify">
       <canvas id="histoChart"></canvas>
       <br>
       <div class="slidecontainer">
@@ -29,13 +29,13 @@
       <p>This is a histogram of the number of times each UMI appeared in the data (UMI frequency) with bins of size 25. Drag the slider to change the maximum value on the y axis. Note that the most frequent UMI (only visible at low y-max values) is present 8,898 times. Dragging the slider all the way to the right reveals the magnitude of the inequality in UMI frequencies. If they had approximately equal probabilities to appear, we would expect this histogram to resemble a normal distribution. While almost all UMIs present in this data appear between 1 and 25 times, there are a considerable number that are much more frequent. The extremely long tail of this histogram is already a strong indication that UMIs are not as random as expected.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Details of the 50 most common UMIs</button>
-  <div id="Freqs" class="w3-container panel">
+  <div id="Freqs" class="w3-container panel w3-justify">
       <canvas id="freqChart"></canvas>
       <p>The UMIs shown here are the most frequent, so they are found in the long tail of the previous histogram. Looking at the sequences reveals that the most common UMIs have relatively low sequence complexity. The sequence of the most common UMI is actually just eight guanosine residues and almost all of the top 50 contain 7 or more of the same nucleotide. This observation is investigated further in the next tab.</p>
   </div>
 
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Composition of the 1,000 most common UMIs</button>
-  <div id="Top1000" class="w3-container panel">
+  <div id="Top1000" class="w3-container panel w3-justify">
     <br>
     <table class="w3-table w3-bordered">
     <thead>
@@ -108,7 +108,7 @@
   </div>
 
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of UMI counts across two experiments</button>
-  <div id="2exp" class="w3-container panel">
+  <div id="2exp" class="w3-container panel w3-justify">
       <canvas id="2expChart"></canvas>
       <p>Comparing these results with those of a similar <i>S. pombe</i> experiment suggests that UMI frequency is consistent across experiments. In both cases, GGGGGGGG is the most common UMI by a wide margin and the more random UMIs are somewhat more dispersed at the low end of the scale. In this chart, the natural logarithm has been taken for both axes and a strong correlation can easily be seen. Details of these experiments are on the <a href='/umi/about'>About</a> page</p>
   </div>
@@ -117,14 +117,14 @@
 
 <br>
 
-<div class="w3-container">
+<div class="w3-container w3-justify">
   <h5>Discussion</h5>
   <p>These results strongly suggest that the UMIs in this data set are not random. They occur at different frequencies that seem to be related to sequence, but the cause is not clear. It could be a matter of production issues with the experimental material supplier, which would explain the similar pattern in two experiments from the same lab. A more direct analysis of the initial reagents would likely provide conclusive evidence regarding this theory. Data from a very different source will explore this idea further later in the report. </p>
   <p>Another explanation is that the more frequent UMI sequences are consistently noncomplex because they are interacting with a part of the mRNA molecule that is also consistently noncomplex. Eukaryotic mRNA is polyadenylated at the 3' end to prevent premature degradation<sup>[Citation needed]</sup>. Further, it has been found that most eukaryotes have additional post-transcriptional modification to their mRNA in the form of polyuridylation<sup>[Citation needed]</sup>. In both cases, a number of repeated nucleotides are appended to the 3' end of mRNA transcripts, which is where the UMIs in this data set anneal during amplification. It is therefore possible that low-complexity UMIs may preferentially bind these repetitive sequences and appear more often in the amplified product. However, neither a run of adenosines nor uracils explains the prevalence of guanosine-rich UMIs, which according to Watson-Crick base pairing should preferentially bind a run of cytosines. </p>
 </div>
 
 <div class="w3-row w3-container">
-    <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/"><i class='fa fa-arrow-left'></i> Previous<br>Return to Home</a>
+    <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/intro"><i class='fa fa-arrow-left'></i> Previous<br>Introduction</a>
     <a class="w3-btn w3-theme w3-hover-theme w3-right" href="/umi/amp-bias">Next <i class='fa fa-arrow-right'></i><br>Amplification Bias?</a>
 </div>
 
