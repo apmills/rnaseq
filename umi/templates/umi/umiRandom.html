@@ -120,12 +120,12 @@
 <div class="w3-container w3-justify">
   <h5>Discussion</h5>
   <p>These results strongly suggest that the UMIs in this data set are not random. They occur at different frequencies that seem to be related to sequence, but the cause is not clear. It could be a matter of production issues with the experimental material supplier, which would explain the similar pattern in two experiments from the same lab. A more direct analysis of the initial reagents would likely provide conclusive evidence regarding this theory. Data from a very different source will explore this idea further later in the report. </p>
-  <p>Another explanation is that the more frequent UMI sequences are consistently noncomplex because they are interacting with a part of the mRNA molecule that is also consistently noncomplex. Eukaryotic mRNA is polyadenylated at the 3' end to prevent premature degradation<sup>[Citation needed]</sup>. Further, it has been found that most eukaryotes have additional post-transcriptional modification to their mRNA in the form of polyuridylation<sup>[Citation needed]</sup>. In both cases, a number of repeated nucleotides are appended to the 3' end of mRNA transcripts, which is where the UMIs in this data set anneal during amplification. It is therefore possible that low-complexity UMIs may preferentially bind these repetitive sequences and appear more often in the amplified product. However, neither a run of adenosines nor uracils explains the prevalence of guanosine-rich UMIs, which according to Watson-Crick base pairing should preferentially bind a run of cytosines. </p>
+  <p>Another explanation is that the more frequent UMI sequences are consistently noncomplex because they are interacting with a part of the mRNA molecule that is also consistently noncomplex. Eukaryotic mRNA is polyadenylated at the 3' end to prevent premature degradation. Further, it has been found that most eukaryotes have additional post-transcriptional modification to their mRNA in the form of polyuridylation<sup>3</sup>. In both cases, a number of repeated nucleotides are appended to the 3' end of mRNA transcripts, which is where the UMIs in this data set anneal during amplification. It is therefore possible that low-complexity UMIs may preferentially bind these repetitive sequences and appear more often in the amplified product. However, neither a run of adenosines nor uracils explains the prevalence of guanosine-rich UMIs, which according to Watson-Crick base pairing should preferentially bind a run of cytosines. </p>
 </div>
 
 <div class="w3-row w3-container">
-    <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/intro"><i class='fa fa-arrow-left'></i> Previous<br>Introduction</a>
-    <a class="w3-btn w3-theme w3-hover-theme w3-right" href="/umi/amp-bias">Next <i class='fa fa-arrow-right'></i><br>Amplification Bias?</a>
+    <a class="w3-btn w3-theme w3-hover-theme w3-left buttL" href="/umi/intro"><span>Previous</span><br>Introduction</a>
+    <a class="w3-btn w3-theme w3-hover-theme w3-right butt" href="/umi/amp-bias"><span>Next</span><br>Amplification Bias?</a>
 </div>
 
 <br>
@@ -168,6 +168,7 @@ var chart = new Chart(ctx, {
 
     // Configuration options go here
     options: {
+      animation: false,
         scales: {
             yAxes: [{
                 scaleLabel: {
@@ -215,6 +216,7 @@ var chart2 = new Chart(ctx2, {
 
     // Configuration options go here
     options: {
+      animation: false,
       tooltips: {
         enabled: false
       },

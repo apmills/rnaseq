@@ -139,12 +139,12 @@
     </tbody>
     </table>
     <br>
-    <p>This table contains the top 8 genes ranked by their PAF value as well as a representative from the low end of the spectrum. For each of these genes, the sequence was manually taken from PomBase<sup>[Citation Needed]</sup> and the GC content was calculated. The result is that both GC content and exonic length varies across these genes and neither can explain why they were amplified differently to others. This process could be made automatic and applied to all genes for a more complete overview, but that is beyond the scope of this project.</p>
+    <p>This table contains the top 8 genes ranked by their PAF value as well as a representative from the low end of the spectrum. For each of these genes, the sequence was manually taken from PomBase<sup>5</sup> and the GC content was calculated. The result is that both GC content and exonic length varies across these genes and neither can explain why they were amplified differently to others. This process could be made automatic and applied to all genes for a more complete overview, but that is beyond the scope of this project.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Lorenz curve and amplification inequality among genes</button>
   <div id="gini" class="w3-container panel">
     <canvas id="giniChart"></canvas>
-    <p>A Lorenz curve and Gini coefficient was calculated based on the PAF values of genes as well. Interestingly, genes are much more equal in their share of amplfication 'wealth' with a Gini coefficient of 20.5 (slightly better than Finland - World Factbook). Despite all the similarites between the results on this page and those on the previous one, genes are much less unequal than UMIs. This is evidenced by the lower Gini coefficient and by how much closer the observed curve is to perfect equality.</p>
+    <p>A Lorenz curve and Gini coefficient was calculated based on the PAF values of genes as well. Interestingly, genes are much more equal in their share of amplfication 'wealth' with a Gini coefficient of 20.5 (slightly better than Finland<sup>4</sup>). Despite all the similarites between the results on this page and those on the previous one, genes are much less unequal than UMIs. This is evidenced by the lower Gini coefficient and by how much closer the observed curve is to perfect equality.</p>
   </div>
 
 </div>
@@ -157,8 +157,8 @@
   <p>The most interesting conclusion that can be drawn from these results is best shown by the Lorenz curve. On the previous page, it was speculated that the amplfication bias in UMIs could be due to the transcripts rather than the UMIs themselves. Yet the results shown here indicate that not only do UMIs bind transcripts in a mostly unbiased way, but the transcripts themselves are not nearly as biased as the UMIs. Even if there was a pattern of certain UMIs binding certain genes, the inequality of genes is too low to fully explain the amplification biases of UMIs.</p>
 </div>
 <div class="w3-row w3-container">
-    <a class="w3-btn w3-theme w3-hover-theme w3-left" href="/umi/amp-bias"><i class='fa fa-arrow-left'></i> Previous<br>Amplification Bias?</a>
-    <a class="w3-btn w3-theme w3-hover-theme w3-right" href="/umi/mammal-data">Next <i class='fa fa-arrow-right'></i><br>What About Mammal Data?</a>
+    <a class="w3-btn w3-theme w3-hover-theme w3-left buttL" href="/umi/amp-bias"><span>Previous</span><br>Amplification Bias?</a>
+    <a class="w3-btn w3-theme w3-hover-theme w3-right butt" href="/umi/mammal-data"><span>Next</span><br>What About Mammal Data?</a>
 </div>
 
 <br>
@@ -202,6 +202,7 @@ var chart1 = new Chart(ctx1, {
 
     // Configuration options go here
     options: {
+      animation: false,
         scales: {
             yAxes: [{
                 scaleLabel: {
@@ -244,6 +245,7 @@ var chart2 = new Chart(ctx2, {
 
     // Configuration options go here
     options: {
+      animation: false,
         scales: {
             yAxes: [{
                 scaleLabel: {
@@ -286,6 +288,7 @@ var chart3 = new Chart(ctx3, {
 
     // Configuration options go here
     options: {
+      animation: false,
         scales: {
             yAxes: [{
                 scaleLabel: {
@@ -328,6 +331,7 @@ var chart4 = new Chart(ctx4, {
 
     // Configuration options go here
     options: {
+      animation: false,
         scales: {
             yAxes: [{
                 scaleLabel: {
@@ -370,6 +374,7 @@ var chart5 = new Chart(ctx5, {
 
     // Configuration options go here
     options: {
+      animation: false,
         maintainAspectRatio: false,
         scales: {
             yAxes: [{
@@ -415,6 +420,7 @@ var chart6 = new Chart(ctx6, {
 
     // Configuration options go here
     options: {
+      animation: false,
         maintainAspectRatio: false,
         scales: {
             yAxes: [{
@@ -465,6 +471,7 @@ var chart7 = new Chart(ctx7, {
 
     // Configuration options go here
     options: {
+      animation: false,
         tooltips: {
           enabled: false
         },
@@ -521,6 +528,7 @@ var chart8 = new Chart(ctx8, {
 
     // Configuration options go here
     options: {
+      animation: false,
         scales: {
             yAxes: [{
                 scaleLabel: {
@@ -562,6 +570,7 @@ var chart9 = new Chart(ctx9, {
 
     // Configuration options go here
     options: {
+      animation: false,
         tooltips: {
           enabled: false
         },
@@ -606,6 +615,7 @@ var chart10 = new Chart(ctx10, {
 
     // Configuration options go here
     options: {
+      animation: false,
         tooltips: {
           enabled: false
         },
