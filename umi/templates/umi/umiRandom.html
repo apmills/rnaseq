@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% load static %}
 <title>Are UMIs Random?</title>
 <header class="w3-container w3-theme w3-padding" id="myHeader">
   <div class="w3-center">
@@ -20,6 +21,7 @@
 <div class='w3-container'>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Histogram of UMI frequencies</button>
   <div id="histo" class="w3-container panel w3-justify">
+      <br>
       <canvas id="histoChart"></canvas>
       <br>
       <div class="slidecontainer">
@@ -30,6 +32,7 @@
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Details of the 50 most common UMIs</button>
   <div id="Freqs" class="w3-container panel w3-justify">
+      <br>
       <canvas id="freqChart"></canvas>
       <p>The UMIs shown here are the most frequent, so they are found in the long tail of the previous histogram. Looking at the sequences reveals that the most common UMIs have relatively low sequence complexity. The sequence of the most common UMI is actually just eight guanosine residues and almost all of the top 50 contain 7 or more of the same nucleotide. This observation is investigated further in the next tab.</p>
   </div>
@@ -109,7 +112,9 @@
 
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of UMI counts across two experiments</button>
   <div id="2exp" class="w3-container panel w3-justify">
+      <br>
       <canvas id="2expChart"></canvas>
+      <!-- <img src="{%  static 'umi/images/umiRandom1.png' %}" style="width:100%" alt="UMI Count 2 Experiments"> -->
       <p>Comparing these results with those of a similar <i>S. pombe</i> experiment suggests that UMI frequency is consistent across experiments. In both cases, GGGGGGGG is the most common UMI by a wide margin and the more random UMIs are somewhat more dispersed at the low end of the scale. In this chart, the natural logarithm has been taken for both axes and a strong correlation can easily be seen. Details of these experiments are on the <a href='/umi/about'>About</a> page</p>
   </div>
 
@@ -169,16 +174,21 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {
       animation: false,
+      legend: {
+        display: false,
+      },
         scales: {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Count'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'UMI Sequence'
                 },
                 ticks: {
@@ -209,7 +219,10 @@ var chart2 = new Chart(ctx2, {
         datasets: [{
             label: "Occurence",
             data: twoExpData,
-            showLine: false
+            showLine: false,
+            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
+            pointRadius: 4,
         }],
 
     },
@@ -217,6 +230,9 @@ var chart2 = new Chart(ctx2, {
     // Configuration options go here
     options: {
       animation: false,
+      legend: {
+        display: false,
+      },
       tooltips: {
         enabled: false
       },
@@ -224,12 +240,14 @@ var chart2 = new Chart(ctx2, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Log UMI Count in Experiment 2'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Log UMI Count in Experiment 1'
                 }
             }]
@@ -289,10 +307,14 @@ var chart3 = new Chart(ctx3, {
 
     // Configuration options go here
     options: {
+      legend: {
+        display: false,
+      },
         scales: {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Occurence'
                 },
                 ticks: {
@@ -302,6 +324,7 @@ var chart3 = new Chart(ctx3, {
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'UMI Frequency (count)'
                 },
                 ticks: {

@@ -46,16 +46,19 @@
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of gene reads and gene expression</button>
   <div id="readsPerCount" class="w3-container panel w3-justify">
+    <br>
     <canvas id="readsPerCountChart"></canvas>
     <p>Similar to the UMIs on the previous page, the reads for each gene tend to increase as the expression increases. Like the earlier case, there is still a fair amount of variation in read count for genes that are expressed at the same level. Again, there appears to be some possibly stochastic element that is affecting how gene are amplified.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of PAF and gene expression</button>
   <div id="readsPerVCount" class="w3-container panel w3-justify">
+    <br>
     <canvas id="readsPerVCountChart"></canvas>
     <p>Here the PAF of each gene is compared with its frequency. Most genes tend to have a PAF around 100, but there are several outliers above this mark and many more genes that have much lower PAF values. Like the previous chart, this indicates that some genes are being amplified more than others.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">PAF across two experiments</button>
   <div id="readsPer2Exp" class="w3-container panel w3-justify">
+    <br>
     <canvas id="readsPer2ExpChart"></canvas>
     <p>Genes continue to mirror the UMI results in this comparison of PAF values from two experiments. Once again, there is a striking correlation indicating that there is some consistency to which genes get amplified more. There is a denser concentration of data points around the 100 mark where some genes deviate from this correlation, but the majority of points lie almost directly on top of the y=x line.</p>
   </div>
@@ -129,7 +132,14 @@
       <td>38.7%</td>
       <td>375</td>
     </tr>
-    <tr class="w3-theme-l3">
+    <tr>
+      <td>&vellip;</td>
+      <td>&vellip;</td>
+      <td>&vellip;</td>
+      <td>&vellip;</td>
+      <td>&vellip;</td>
+    </tr>
+    <tr class="w3-theme-l4">
       <td>971</td>
       <td>SPAC4G9.04c</td>
       <td>1.2</td>
@@ -161,7 +171,6 @@
     <a class="w3-btn w3-theme w3-hover-theme w3-right butt" href="/umi/mammal-data"><span>Next</span><br>What About Mammal Data?</a>
 </div>
 
-<br>
 <br>
 
 <script>
@@ -207,6 +216,7 @@ var chart1 = new Chart(ctx1, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Count',
                 },
                 ticks: {
@@ -293,6 +303,7 @@ var chart3 = new Chart(ctx3, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Count',
                 },
                 ticks: {
@@ -380,6 +391,7 @@ var chart5 = new Chart(ctx5, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Count',
                 },
                 ticks: {
@@ -465,13 +477,18 @@ var chart7 = new Chart(ctx7, {
         datasets: [{
             label: "Stuff",
             data: data7,
-            showLine: false
+            showLine: false,
+            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
         }],
     },
 
     // Configuration options go here
     options: {
       animation: false,
+      legend: {
+        display: false,
+      },
         tooltips: {
           enabled: false
         },
@@ -479,12 +496,14 @@ var chart7 = new Chart(ctx7, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Log Reads per Gene'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Log Gene Expression (molecule count)'
                 }
             }]
@@ -533,12 +552,14 @@ var chart8 = new Chart(ctx8, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Percentage of Sequencing "Wealth"'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Percentage of Gene Population'
                 }
             }]
@@ -564,13 +585,18 @@ var chart9 = new Chart(ctx9, {
         datasets: [{
             label: "Stuff",
             data: data9,
-            showLine: false
+            showLine: false,
+            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
         }],
     },
 
     // Configuration options go here
     options: {
       animation: false,
+      legend: {
+        display: false,
+      },
         tooltips: {
           enabled: false
         },
@@ -578,12 +604,14 @@ var chart9 = new Chart(ctx9, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Average Reads per Gene Molecule'
+                    fontSize: 15,
+                    labelString: 'PCR Amplification Factor'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Log Gene Expression (molecule count)'
                 }
             }]
@@ -609,13 +637,18 @@ var chart10 = new Chart(ctx10, {
         datasets: [{
             label: "Stuff",
             data: data10,
-            showLine: false
+            showLine: false,
+            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
         }],
     },
 
     // Configuration options go here
     options: {
       animation: false,
+      legend: {
+        display: false,
+      },
         tooltips: {
           enabled: false
         },
@@ -623,12 +656,14 @@ var chart10 = new Chart(ctx10, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'PAF in Experiment 2'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'PAF in Experiment 1'
                 }
             }]

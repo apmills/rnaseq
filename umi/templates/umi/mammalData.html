@@ -11,8 +11,8 @@
 <br>
 
 <div class="w3-container w3-justify">
-  <p>The discoveries up to this point have all come from data originating in <i>S. pombe</i> cells. Many of the applications of scRNA-seq such as the study of early development and cellular disease states involve mouse or human cells. While the fundamental elements of the technique are the same, it is prudent to try to replicate the previous findings using data from mammalian cells for that reason. The data in this section comes from 100 human cells and is publicly available online. As always, there is a more detailed description of the data on the <a href='/umi/about'>About</a> page.</p>
-  <p>It is important to note that this data uses UMIs that are 10 bases long instead of 8 and that it originated from a different lab that may use different protocols. Due to the larger length of the sequence, the UMIs in this data set have many more (4<sup>10</sup> = 1,048,576) possible permutations and so the probability of two UMIs occuring with the same sequence is much lower. In addition, the sequencing depth of this experiment is lower, which results in a lower number of reads per cell and lower read counts overall across both UMIs and genes. Naturally, this is not ideal for comparison with the <i>S. pombe</i> data, but it was expedient.</p>
+  <p>The discoveries up to this point have all come from data originating in <i>S. pombe</i> cells. Many of the applications of scRNA-seq such as the study of early development and cellular disease states involve mouse or human cells. While the fundamental elements of the technique are the same, it is prudent to try to replicate the previous findings using data from mammalian cells. The data in this section comes from a sample of 100 human cells and is publicly available online. As always, there is a more detailed description of the data on the <a href='/umi/about'>About</a> page.</p>
+  <p>It is important to note that this data uses UMIs that are 10 bases long instead of 8 and that it originated from a different lab that may use different protocols. Due to the larger length of the sequence, the UMIs in this data set have many more (4<sup>10</sup> = 1,048,576) possible permutations and so the probability of two UMIs occuring with the same sequence is much lower. In addition, the sequencing depth of this experiment is lower, which results in a lower number of reads per cell and lower read counts overall across both UMIs and genes. Naturally, this is not ideal for comparison with the <i>S. pombe</i> data, but the basic first steps of analysis can be carried out.</p>
   <p></p>
 </div>
 
@@ -20,16 +20,17 @@
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Histogram of UMI frequencies</button>
   <div id="histo" class="w3-container panel w3-justify">
       <canvas id="histoChart"></canvas>
+      <br>
       <div class="slidecontainer">
         <input type="range" min="10" max="280000" value="130" class="slider" step="1" id="myRange">
       </div>
       <div id='demo'></div>
-      <p>Drag the slider to change the maximum value on the y axis. Note that the most frequent UMI (only visible at low y max values) is present 8,898 times. Dragging the slider all the way to the right reveals the magnitude of the inequality in UMI frequencies. Almost all UMIs present in this data appear between 1 and 25 times. The extremely long tail of this histogram is already a strong indication that UMIs are not as random as expected.</p>
+      <p>Like the previous histogram, the y axis can be adjusted using the slider to reveal the full scale of this chart. Notice that in this data set the most frequent UMI occurs only 85 times, smaller than the maximum in the <i>S. pombe</i> data by a factor of about 100. Again, this is due to both a decreased read count in this experiment and the increased UMI length. Overall, this histogram shows that the human UMIs have a smaller range in their frequencies and a much shorter&mdash;but still present&mdash;tail. </p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Frequencies of the 50 most common UMIs</button>
   <div id="Freqs" class="w3-container panel w3-justify">
       <canvas id="freqChart"></canvas>
-      <p>The UMIs shown here are the most frequent, so they are found in the long tail of the previous histogram. Looking at the sequences reveals that the most common UMIs have relatively low complexity. The sequence of the most common UMI is actually just eight guanosine residues and almost all of the top 50 contain 7 or more of the same nucleotide. This observation is investigated further in the next tab.</p>
+      <p>These are the 50 most frequent UMIs in the human data. Paralleling the <i>S. pombe</i> data, the most common UMI is a simple run of the same nucleotide. However in this case, the nucleotide is thymine and not guanosine. 5 of the top 6 UMIs contain a large run of thymines, although the rest of the top 50 show much more variety than those of the yeast data. As before, the next tab goes further into detail examining the top 1000 UMIs.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Composition of the 1,000 most common UMIs</button>
   <div id="Top1000" class="w3-container panel w3-justify">
@@ -114,24 +115,24 @@
     </tbody>
     </table>
     <br>
-    <p>Expanding the focus to the top 1,000 most common UMIs, it is clear that low complexity is related in some way to frequency. The same nucleotide makes up more than half of the sequence for almost 70% of these UMIs. By far the most common nucleotide in the top 1,000 is guanosine while curiously, cytosine is highly underrepresented. </p>
+    <p>Examining the composition of the top 1000 human UMIs, it appears that there is much more variety in the sequences. Only about 15% of the top 1000 have sequences where more than half of nucleotides are identical (cf. 70% in the <i>S. pombe</i> data). As seen in the previous tab, it appears that thymine, rather than guanosine, is the most dominant nucleotide in this data. Curiously, cytosine is once again the least common nucleotide.</p>
   </div>
-  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Gini Index and Chart</button>
+  <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Lorenz curve for genes</button>
   <div id="gini" class="w3-container panel w3-justify">
     <canvas id="giniChart"></canvas>
-    <p>Text</p>
+    <p>Switching focus to mammalian genes, the Lorenze curve for their PAF equality indicates that they are actually very equal. The Gini coefficient of <b>SOMETHING</b> shows that they are almost perfectly equal. This is a somewhat strange result and the likely cause as well as the reason behind foregoing a UMI Lorenz curve will be explained in the Discussion below.</p>
   </div>
 </div>
 
 <br>
 <div class="w3-container w3-justify">
-  <h5>Conclusion</h5>
-  <p>Well this leads us to believe they are not that random actually</p>
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  <h5>Discussion</h5>
+  <p>At a first glance, it appears that the mammalian data has far less bias in it than the fission yeast data set. However, the lower overall read count in this data is a strong confounding factor in all of these analyses. It is apparent that the charts featuring PAF values are conspicuously absent from this page, and there is a reason for that. Due to the low read counts, all of the PAF values for both UMIs and genes in this data set are between 1 and 2. The values of 2 come from UMIs or genes that were counted once and read twice by chance. For every other instance, they were never read more than twice the number of times they were counted. This results in such a small range of values that the Lorenz curve is barely applicable (and not at all in the case of UMIs).</p>
+  <p>So unfortunately, the main result of this page is that this mammalian data is unfit for these analyses. It was used mainly for timeliness and to give some indication of how this report's findings apply to experiments using mammalian cells. In the latter regard, it was still somewhat successful in that it showed that repetitive UMIs are the most common in mammals as well. A UMI having a sequence of entirely thymines is quite literally a one-in-a-million chance and for this to be the most common UMI, there must be a bias at work. Recall that the poly(A) tail is positioned close to where UMIs anneal to the transcript (depending on the protocol)<sup>3</sup>. It is possible that thymine-rich UMIs preferentially bind the long run of adenosines and as a result, are the most common UMIs in the data.</p>
 </div>
 <div class="w3-row w3-container">
     <a class="w3-btn w3-theme w3-hover-theme w3-left buttL" href="/umi/gene-bias"><span>Previous</span><br>Is There a Gene Bias?</a>
-    <a class="w3-btn w3-theme w3-hover-theme w3-right butt" href="/umi/mammal-data"><span>Next</span><br>Conclusion</a>
+    <a class="w3-btn w3-theme w3-hover-theme w3-right butt" href="/umi/conclusion"><span>Next</span><br>Conclusion</a>
 </div>
 
 <br>
@@ -262,7 +263,6 @@ var chart2 = new Chart(ctx2, {
 
     // Configuration options go here
     options: {
-      animation: false,
         scales: {
             yAxes: [{
                 scaleLabel: {
