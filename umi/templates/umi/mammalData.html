@@ -7,6 +7,15 @@
   <div class="w3-center">
   <h1 class="w3-xxxlarge w3-animate-bottom">How do UMIs behave in mammalian samples?</h1>
 </div>
+<script>
+document.body.classList.add('js-loading');
+
+window.addEventListener("load", showPage);
+
+function showPage() {
+  document.body.classList.remove('js-loading');
+}
+</script>
 </header>
 <br>
 
@@ -211,6 +220,7 @@ var chart1 = new Chart(ctx1, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Occurence'
                 },
                 ticks: {
@@ -220,6 +230,7 @@ var chart1 = new Chart(ctx1, {
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'UMI Frequency (count)'
                 },
                 ticks: {
@@ -267,12 +278,14 @@ var chart2 = new Chart(ctx2, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Count'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'UMI Sequence'
                 },
                 ticks: {
@@ -325,12 +338,14 @@ var chart3 = new Chart(ctx3, {
             yAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Fraction of Sequencing "Wealth"'
                 }
             }],
             xAxes: [{
                 scaleLabel: {
                     display: true,
+                    fontSize: 15,
                     labelString: 'Fraction of Gene Population'
                 }
             }]

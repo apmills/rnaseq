@@ -8,6 +8,15 @@
   <div class="w3-center">
   <h1 class="w3-xxxlarge w3-animate-bottom">Are UMIs as random as expected?</h1>
 </div>
+<script>
+document.body.classList.add('js-loading');
+
+window.addEventListener("load", showPage);
+
+function showPage() {
+  document.body.classList.remove('js-loading');
+}
+</script>
 </header>
 <br>
 
@@ -113,8 +122,8 @@
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of UMI counts across two experiments</button>
   <div id="2exp" class="w3-container panel w3-justify">
       <br>
-      <canvas id="2expChart"></canvas>
-      <!-- <img src="{%  static 'umi/images/umiRandom1.png' %}" style="width:100%" alt="UMI Count 2 Experiments"> -->
+      <!-- <canvas id="2expChart"></canvas> -->
+      <img src="{%  static 'umi/images/umiRandom1.png' %}" style="width:100%" alt="UMI Count 2 Experiments">
       <p>Comparing these results with those of a similar <i>S. pombe</i> experiment suggests that UMI frequency is consistent across experiments. In both cases, GGGGGGGG is the most common UMI by a wide margin and the more random UMIs are somewhat more dispersed at the low end of the scale. In this chart, the natural logarithm has been taken for both axes and a strong correlation can easily be seen. Details of these experiments are on the <a href='/umi/about'>About</a> page</p>
   </div>
 
@@ -202,58 +211,58 @@ var chart = new Chart(ctx, {
 });
 
 
-var twoExpData = umiRandom_2_xcounts.map((x, i) => {
-  return {
-    x: x,
-    y: umiRandom_2_ycounts[i]
-  };
-});
-var ctx2 = document.getElementById('2expChart').getContext('2d');
-var chart2 = new Chart(ctx2, {
-    // The type of chart we want to create
-    type: 'scatter',
+// var twoExpData = umiRandom_2_xcounts.map((x, i) => {
+//   return {
+//     x: x,
+//     y: umiRandom_2_ycounts[i]
+//   };
+// });
+// var ctx2 = document.getElementById('2expChart').getContext('2d');
+// var chart2 = new Chart(ctx2, {
+//     // The type of chart we want to create
+//     type: 'scatter',
 
-    // The data for our dataset
-    data: {
-        labels: umiRandom_1_umis,
-        datasets: [{
-            label: "Occurence",
-            data: twoExpData,
-            showLine: false,
-            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
-            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
-            pointRadius: 4,
-        }],
+//     // The data for our dataset
+//     data: {
+//         labels: umiRandom_1_umis,
+//         datasets: [{
+//             label: "Occurence",
+//             data: twoExpData,
+//             showLine: false,
+//             pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+//             pointBorderColor: 'rgb(99, 99, 255, 0.2)',
+//             pointRadius: 4,
+//         }],
 
-    },
+//     },
 
-    // Configuration options go here
-    options: {
-      animation: false,
-      legend: {
-        display: false,
-      },
-      tooltips: {
-        enabled: false
-      },
-        scales: {
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log UMI Count in Experiment 2'
-                }
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log UMI Count in Experiment 1'
-                }
-            }]
-        }
-    }
-});
+//     // Configuration options go here
+//     options: {
+//       animation: false,
+//       legend: {
+//         display: false,
+//       },
+//       tooltips: {
+//         enabled: false
+//       },
+//         scales: {
+//             yAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log UMI Count in Experiment 2'
+//                 }
+//             }],
+//             xAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log UMI Count in Experiment 1'
+//                 }
+//             }]
+//         }
+//     }
+// });
 
 function histogram(data, size) {
     var length = data.length;

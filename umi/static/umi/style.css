@@ -24,7 +24,7 @@
 .w3-hover-border-theme:hover {border-color:#05427f !important}
 
 .marge {
-  /*margin: 0px 150px;*/
+  margin: 0px 150px;
 }
 .center {
   margin: auto !important;
@@ -172,4 +172,10 @@ th, td {
 .buttL:hover span:after {
   opacity: 1;
   left: 0;
+}
+
+.js-loading *,
+.js-loading *:before,
+.js-loading *:after {
+  animation-play-state: paused !important;
 }

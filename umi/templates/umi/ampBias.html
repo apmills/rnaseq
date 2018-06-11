@@ -2,11 +2,21 @@
 
 {% block content %}
 
+{% load static %}
 <title>Is There an Amplification Bias?</title>
 <header class="w3-container w3-theme w3-padding" id="myHeader">
   <div class="w3-center">
   <h1 class="w3-xxxlarge w3-animate-bottom">Are all UMIs amplified at the same rate?</h1>
 </div>
+<script>
+document.body.classList.add('js-loading');
+
+window.addEventListener("load", showPage);
+
+function showPage() {
+  document.body.classList.remove('js-loading');
+}
+</script>
 </header>
 <br>
 
@@ -20,19 +30,22 @@
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of UMI reads across two experiments</button>
   <div id="reads2exp" class="w3-container panel w3-justify">
     <br>
-    <canvas id="reads2expChart"></canvas>
+    <!-- <canvas id="reads2expChart"></canvas> -->
+    <img src="{%  static 'umi/images/ampBias1.png' %}" style="width:100%" alt="UMI Count 2 Experiments">
     <p>As a first step, UMI reads were compared across two experiments to see if they are consistent. It was already known that UMI counts correlate across these two experiments, so this result is largely as expected. The reason experiment 2 has higher reads in many instances is due to the fact that it has more reads overall than experiment 1.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Comparison of a UMI's reads and its frequency</button>
   <div id="readsVCounts" class="w3-container panel w3-justify">
     <br>
-    <canvas id="readsVCountsChart"></canvas>
+    <!-- <canvas id="readsVCountsChart"></canvas> -->
+    <img src="{%  static 'umi/images/ampBias2.png' %}" style="width:100%" alt="UMI Count 2 Experiments">
     <p>This chart compares a UMI's reads with its count, which should be highly correlated. If all UMIs are amplified equally, then the UMI that appears most frequently before amplification (count) should also be most frequent after (reads). The result is that while these two values do correlate to some extent, there is still a fair amount of variation in the amplification that is not explained by a UMI's count. This is most evidently seen at the low end of the count scale where many UMIs have the same count value but a large variation in the number of reads. </p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">PAF compared with UMI frequency</button>
   <div id="readsPerVCount" class="w3-container panel w3-justify">
     <br>
-    <canvas id="readsPerVCountChart"></canvas>
+    <!-- <canvas id="readsPerVCountChart"></canvas> -->
+    <img src="{%  static 'umi/images/ampBias3.png' %}" style="width:100%" alt="UMI Count 2 Experiments">
     <p>Here, the PCR amplification factor for each UMI is compared with its count to see if UMIs of a certain frequency are being amplified more than others. The lack of a pattern suggests that this is not the case and that PAF varies across the spectrum of UMI frequency. Like the previous chart, there appears to be a large amount of variation in amplification. This in itself does not indicate any bias, as it could simply be the result of random effects during amplification.</p>
     <!-- <div class="slidecontainer">
       <input type="range" min="10" max="1000" value="500" class="slider" step="1" id="myRange">
@@ -43,7 +56,8 @@
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">PAF across two experiments</button>
   <div id="readsPer2exp" class="w3-container panel w3-justify">
     <br>
-    <canvas id="readsPer2expChart"></canvas>
+    <!-- <canvas id="readsPer2expChart"></canvas> -->
+    <img src="{%  static 'umi/images/ampBias4.png' %}" style="width:100%" alt="UMI Count 2 Experiments">
     <p>This chart provides a very interesting and surprising insight. The same UMIs are being amplified more in both experiments with a strong correlation. This result suggests that something about these UMIs makes them consistently biased in favour of amplification.</p>
   </div>
   <button class="w3-button w3-block w3-theme w3-hover-bar-theme w3-left-align accordion">Details of the highest PAF UMIs</button>
@@ -91,216 +105,220 @@ for (w = 0; w < acc.length; w++) {
   });
 }
 
-var ctx2 = document.getElementById('reads2expChart').getContext('2d');
-// var smallx = ampBias_test_x.slice(0, 500)
-// var smally = ampBias_test_y.slice(0, 500)
-var readsTwoExpData = ampBias_1_xcounts.map((x, i) => {
-  return {
-    x: x,
-    y: ampBias_1_ycounts[i]
-  };
-});
+// var ctx2 = document.getElementById('reads2expChart').getContext('2d');
+// // var smallx = ampBias_test_x.slice(0, 500)
+// // var smally = ampBias_test_y.slice(0, 500)
+// var readsTwoExpData = ampBias_1_xcounts.map((x, i) => {
+//   return {
+//     x: x,
+//     y: ampBias_1_ycounts[i]
+//   };
+// });
 
-var chart2 = new Chart(ctx2, {
-    // The type of chart we want to create
-    type: 'scatter',
+// var chart2 = new Chart(ctx2, {
+//     // The type of chart we want to create
+//     type: 'scatter',
 
-    // The data for our dataset
-    data: {
-        labels: umiRandom_1_umis,
-        datasets: [{
-            label: "Stuff",
-            data: readsTwoExpData,
-            showLine: false,
-            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
-            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
-        }],
-    },
+//     // The data for our dataset
+//     data: {
+//         labels: umiRandom_1_umis,
+//         datasets: [{
+//             label: "Stuff",
+//             data: readsTwoExpData,
+//             showLine: false,
+//             pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+//             pointBorderColor: 'rgb(99, 99, 255, 0.2)',
+//             pointRadius: 4,
+//         }],
+//     },
 
-    // Configuration options go here
-    options: {
-        animation: false,
-        legend: {
-        display: false,
-      },
-        tooltips: {
-          enabled: false
-        },
-        scales: {
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log UMI Reads in Experiment 2'
-                }
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log UMI Reads in Experiment 1'
-                }
-            }]
-        }
-    }
-});
+//     // Configuration options go here
+//     options: {
+//         animation: false,
+//         legend: {
+//         display: false,
+//       },
+//         tooltips: {
+//           enabled: false
+//         },
+//         scales: {
+//             yAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log UMI Reads in Experiment 2'
+//                 }
+//             }],
+//             xAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log UMI Reads in Experiment 1'
+//                 }
+//             }]
+//         }
+//     }
+// });
 
-var ctx3 = document.getElementById('readsVCountsChart').getContext('2d');
-// var smallx = ampBias_test_x.slice(0, 500)
-// var smally = ampBias_test_y.slice(0, 500)
-var readsVCountsData = ampBias_2_counts.map((x, i) => {
-  return {
-    x: x,
-    y: ampBias_2_reads[i]
-  };
-});
+// var ctx3 = document.getElementById('readsVCountsChart').getContext('2d');
+// // var smallx = ampBias_test_x.slice(0, 500)
+// // var smally = ampBias_test_y.slice(0, 500)
+// var readsVCountsData = ampBias_2_counts.map((x, i) => {
+//   return {
+//     x: x,
+//     y: ampBias_2_reads[i]
+//   };
+// });
 
-var chart3 = new Chart(ctx3, {
-    // The type of chart we want to create
-    type: 'scatter',
+// var chart3 = new Chart(ctx3, {
+//     // The type of chart we want to create
+//     type: 'scatter',
 
-    // The data for our dataset
-    data: {
-        labels: umiRandom_1_umis,
-        datasets: [{
-            label: "Stuff",
-            data: readsVCountsData,
-            showLine: false,
-            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
-            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
-        }],
-    },
+//     // The data for our dataset
+//     data: {
+//         labels: umiRandom_1_umis,
+//         datasets: [{
+//             label: "Stuff",
+//             data: readsVCountsData,
+//             showLine: false,
+//             pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+//             pointBorderColor: 'rgb(99, 99, 255, 0.2)',
+//             pointRadius: 4,
+//         }],
+//     },
 
-    // Configuration options go here
-    options: {
-        animation: false,
-        legend: {
-        display: false,
-      },
-        tooltips: {
-          enabled: false
-        },
-        scales: {
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log UMI Reads'
-                }
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log UMI frequency (count)'
-                }
-            }]
-        }
-    }
-});
-var ctx = document.getElementById('readsPerVCountChart').getContext('2d');
-var data = ampBias_3_readsPer.map((x, i) => {
-  return {
-    x: x,
-    y: ampBias_3_count[i]
-  };
-});
+//     // Configuration options go here
+//     options: {
+//         animation: false,
+//         legend: {
+//         display: false,
+//       },
+//         tooltips: {
+//           enabled: false
+//         },
+//         scales: {
+//             yAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log UMI Reads'
+//                 }
+//             }],
+//             xAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log UMI frequency (count)'
+//                 }
+//             }]
+//         }
+//     }
+// });
+// var ctx = document.getElementById('readsPerVCountChart').getContext('2d');
+// var data = ampBias_3_readsPer.map((x, i) => {
+//   return {
+//     x: x,
+//     y: ampBias_3_count[i]
+//   };
+// });
 
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'scatter',
+// var chart = new Chart(ctx, {
+//     // The type of chart we want to create
+//     type: 'scatter',
 
-    // The data for our dataset
-    data: {
-        labels: umiRandom_1_umis,
-        datasets: [{
-            label: "Stuff",
-            data: data,
-            showLine: false,
-            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
-            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
-        }],
-    },
+//     // The data for our dataset
+//     data: {
+//         labels: umiRandom_1_umis,
+//         datasets: [{
+//             label: "Stuff",
+//             data: data,
+//             showLine: false,
+//             pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+//             pointBorderColor: 'rgb(99, 99, 255, 0.2)',
+//             pointRadius: 4,
+//         }],
+//     },
 
-    // Configuration options go here
-    options: {
-        animation: false,
-        legend: {
-        display: false,
-      },
-        tooltips: {
-          enabled: false
-        },
-        scales: {
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log PCR Amplification Factor'
-                }
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log UMI frequency (count)'
-                }
-            }]
-        }
-    }
-});
+//     // Configuration options go here
+//     options: {
+//         animation: false,
+//         legend: {
+//         display: false,
+//       },
+//         tooltips: {
+//           enabled: false
+//         },
+//         scales: {
+//             yAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log PCR Amplification Factor'
+//                 }
+//             }],
+//             xAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log UMI frequency (count)'
+//                 }
+//             }]
+//         }
+//     }
+// });
 
-var ctx4 = document.getElementById('readsPer2expChart').getContext('2d');
-var data4 = ampBias_4_readsPerx.map((x, i) => {
-  return {
-    x: x,
-    y: ampBias_4_readsPery[i]
-  };
-});
+// var ctx4 = document.getElementById('readsPer2expChart').getContext('2d');
+// var data4 = ampBias_4_readsPerx.map((x, i) => {
+//   return {
+//     x: x,
+//     y: ampBias_4_readsPery[i]
+//   };
+// });
 
-var chart4 = new Chart(ctx4, {
-    // The type of chart we want to create
-    type: 'scatter',
+// var chart4 = new Chart(ctx4, {
+//     // The type of chart we want to create
+//     type: 'scatter',
 
-    // The data for our dataset
-    data: {
-        labels: umiRandom_1_umis,
-        datasets: [{
-            label: "Stuff",
-            data: data4,
-            showLine: false,
-            pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
-            pointBorderColor: 'rgb(99, 99, 255, 0.2)',
-        }],
-    },
+//     // The data for our dataset
+//     data: {
+//         labels: umiRandom_1_umis,
+//         datasets: [{
+//             label: "Stuff",
+//             data: data4,
+//             showLine: false,
+//             pointBackgroundColor: 'rgb(99, 99, 255, 0.1)',
+//             pointBorderColor: 'rgb(99, 99, 255, 0.2)',
+//             pointRadius: 4,
+//         }],
+//     },
 
-    // Configuration options go here
-    options: {
-        animation: false,
-        legend: {
-        display: false,
-      },
-        tooltips: {
-          enabled: false
-        },
-        scales: {
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log PAF in Experiment 2'
-                }
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    fontSize: 15,
-                    labelString: 'Log PAF in Experiment 1'
-                }
-            }]
-        }
-    }
-});
+//     // Configuration options go here
+//     options: {
+//         animation: false,
+//         legend: {
+//         display: false,
+//       },
+//         tooltips: {
+//           enabled: false
+//         },
+//         scales: {
+//             yAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log PAF in Experiment 2'
+//                 }
+//             }],
+//             xAxes: [{
+//                 scaleLabel: {
+//                     display: true,
+//                     fontSize: 17,
+//                     labelString: 'Log PAF in Experiment 1'
+//                 }
+//             }]
+//         }
+//     }
+// });
 
 var ctx5 = document.getElementById('giniChart').getContext('2d');
 var data51 = ampBias_5_bins.map((x, i) => {
